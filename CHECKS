@@ -1,0 +1,1 @@
+dokku checks:skip gh6 worker,web
