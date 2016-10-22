@@ -1,12 +1,10 @@
 import {Router, Route, browserHistory} from 'react-router';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Main from './main.jsx';
-import Goodbye from './goodbye.jsx';
+import LandingPage from './main.jsx';
 
 const routes = <Route>		
-					<Route path = "/gh6" component={Main} />
-					<Route name="goodbye" path="/goodbye" component = {Goodbye} />
+					<Route path = "/gh6" component={LandingPage} />
 				</Route>;
 
 window.onload = () => {
