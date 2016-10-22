@@ -1,38 +1,50 @@
 import React from 'react';
 import {Form, FormControl, FormGroup, Checkbox, Button, Col, ControlLabel }from 'react-bootstrap';
 
-export default class ProviderPortal extends React.Component{
+
+const ProviderPortal = React.createClass({
+    getInitialState(){
+        return {
+            isLoggedIn: false
+        };
+    },
+    setLoggedIn() {
+        this.setState({isLoggedIn:true});
+    },
     render(){
+        if(!this.state.isLoggedIn){
+            return(
+                <div className="form-container" >
+                    <form>
+                        <FormGroup controlId="formHorizontalEmail">
+                          <Col componentClass={ControlLabel} sm={2}>
+                            Email
+                          </Col>
+                          <Col sm={10}>
+                            <FormControl type="email" placeholder="Email" value={this.state.email}/>
+                          </Col>
+                        </FormGroup>
+
+                        <FormGroup controlId="formHorizontalPassword">
+                          <Col componentClass={ControlLabel} sm={2}>
+                            Password
+                          </Col>
+                          <Col sm={10}>
+                            <FormControl type="password" placeholder="Password" />
+                          </Col>
+                          <div className="row pull-right">
+                              <Button id="login" bsStyle='primary' onClick={this.setLoggedIn}>
+                                  Login
+                              </Button>
+                          </div>
+                        </FormGroup>
+                    </form>
+                </div>
+            );
+        }
+        else{
         return(
-            <Form >
-            <FormGroup controlId="formHorizontalEmail">
-              <Col componentClass={ControlLabel} sm={2}>
-                Email
-              </Col>
-              <Col sm={10}>
-                <FormControl type="email" placeholder="Email" />
-              </Col>
-            </FormGroup>
-
-            <FormGroup controlId="formHorizontalPassword">
-              <Col componentClass={ControlLabel} sm={2}>
-                Password
-              </Col>
-              <Col sm={10}>
-                <FormControl type="password" placeholder="Password" />
-              </Col>
-            </FormGroup>
-
-            <FormGroup controlId="formHorizontalConfirmPassword">
-              <Col componentClass={ControlLabel} sm={2}>
-                Confirm Password
-              </Col>
-              <Col sm={10}>
-                <FormControl type="password" placeholder="Confirm Password" />
-              </Col>
-            </FormGroup>
-
-
+            <Form>
             <FormGroup controlId="formHorizontalLocation">
               <Col componentClass={ControlLabel} sm={2}>
                 Address
@@ -47,11 +59,8 @@ export default class ProviderPortal extends React.Component{
                 <FormControl type="text" placeholder="Zip Code" />
               </Col>
             </FormGroup>
-
-
-
             <FormGroup>
-            <ControlLabel> Services Offered </ControlLabel> 
+            <ControlLabel> Services Offered </ControlLabel>
               <Checkbox inline>
                 Housing and Utility Assistance
               </Checkbox>
@@ -59,15 +68,14 @@ export default class ProviderPortal extends React.Component{
                 Emergency Shelter
               </Checkbox>
               <Checkbox inline>
-                Medical 
+                Medical
               </Checkbox>
               <Checkbox inline>
                  Mental Health Services
               </Checkbox>
             </FormGroup>
-
             <FormGroup controlId="formHorizontalGroupsServed">
-              <ControlLabel> Groups Served </ControlLabel>  
+              <ControlLabel> Groups Served </ControlLabel>
               <Checkbox inline>
                 Men Only
               </Checkbox>
@@ -75,7 +83,7 @@ export default class ProviderPortal extends React.Component{
                 Women only
               </Checkbox>
               <Checkbox>
-                Age Range  
+                Age Range
               </Checkbox>
             </FormGroup>
 
@@ -88,6 +96,8 @@ export default class ProviderPortal extends React.Component{
             </FormGroup>
           </Form>
             );
-
+        }
     }
-}
+});
+
+module.exports = ProviderPortal;

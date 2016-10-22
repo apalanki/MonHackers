@@ -22,7 +22,7 @@ let HomelessMap = React.createClass({
     getMarkers(){
         return this.props.shelters.map(function (shelter, index) {
             return (<ShelterPin key={index} lat={shelter.latitude} lng={shelter.longitude}
-                                missing_requirements={shelter.missing_requirements} text={shelter.name}/>);
+                                missing_requirements={shelter.missing_requirements} text={shelter.capacity}/>);
         });
     },
     render() {
@@ -30,7 +30,7 @@ let HomelessMap = React.createClass({
             <div className="map-wrapper">
                 <GoogleMap
                     bootstrapURLKeys={{key: MapsApiKey}}
-                    center={[38.637607, -90.1848]}
+                    center={[38.668104, -90.335153]}
                     zoom={12}>
                     {this.getMarkers()}
                 </GoogleMap>
