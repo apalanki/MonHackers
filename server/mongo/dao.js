@@ -3,9 +3,9 @@ const MongoClient = require('mongodb').MongoClient;
 // Connection URL
 const url = 'mongodb://monhackers:monhackers@ds023603.mlab.com:23603/globalhack6';
 const handle = (err, result, callback) => {
-    if(err) callback(err, null);
+    if (err) callback(err, null);
     else callback(null, result);
-}
+};
 
 function getAllPeople(callback) {
     console.log("getting all people");
@@ -15,7 +15,7 @@ function getAllPeople(callback) {
         }
         else {
             find(db, 'people', {}, (err, result) => {
-                handle(err,result,callback);
+                handle(err, result, callback);
             });
         }
         db.close();
@@ -26,7 +26,7 @@ function getAllApplicants(callback) {
         if (err) callback(err);
         else {
             find(db, 'applicants', {}, (err, result) => {
-                handle(err,result,callback);
+                handle(err, result, callback);
             });
         }
         db.close();
@@ -49,9 +49,8 @@ function isDefined(data) {
     return data !== 'Unspecified';
 }
 
-function getShelterDetails(callback, requestQuery) {
+function getShelterDetails(requestQuery, callback) {
     var query = {};
-    console.log(requestQuery);
     if (isDefined(requestQuery['gender'])) {
         requestQuery.gender === 'female'
             ? query['$or'] = [{'single_women_18+': 'yes'}, {'pregnant_women_only': 'yes'}]
@@ -60,11 +59,7 @@ function getShelterDetails(callback, requestQuery) {
     if (isDefined(requestQuery['veteran'])) query['veteran_support'] = requestQuery.veteran;
     MongoClient.connect(url, function (err, db) {
         if (err) callback(err);
-        else {
-            find(db, 'shelters', query, (err, result) => {
-                handle(err,result,callback);
-            });
-        }
+        else find(db, 'shelters', query, (err, result) => handle(err, result, callback));
         db.close();
     });
 }

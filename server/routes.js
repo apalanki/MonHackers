@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const dao = require('./mongo/dao');
-const geoCodeData = require('./geocode/geocodeData');
+// const geoCodeData = require('./geocode/geocodeData');
 
 function returnFailure(res, err) {
     return res.status(400).send({'error': err});
@@ -27,9 +27,7 @@ router.post('/applicant', (req, res) => {
 });
 
 router.get('/search', (req, res) => {
-    dao.getShelterDetails((err, result) => {
-        err ? returnFailure(res, err) : geoCodeData.addLatLongToSheltersArray(result, (err, latLongShelters)=>returnSuccess(res, latLongShelters));
-    }, req.query);
+    dao.getShelterDetails(req.query, (err, result) => err ? returnFailure(res, err) : returnSuccess(res, result));
 });
 
 module.exports = router;

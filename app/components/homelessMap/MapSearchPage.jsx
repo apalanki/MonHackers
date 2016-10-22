@@ -55,7 +55,7 @@ var MapSearchPage = React.createClass({
                             <option value="Female">Female</option>
                         </FormControl>
                     </FormGroup>
-                    &nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
                     <FormGroup controlId="formControlsSelect">
                         <ControlLabel>Is Veteran?</ControlLabel>
                         &nbsp;&nbsp;
