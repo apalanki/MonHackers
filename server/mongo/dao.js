@@ -38,12 +38,9 @@ function insertApplicant(applicant, callback) {
     });
 }
 
-function getShelterDetails(){
+function getShelterDetails(callback){
     MongoClient.connect(url, function (err, db) {
-        assert.equal(null, err);
-        if (err) {
-            callback(err);
-        }
+        if (err) callback(err);
         else {
             find(db, 'shelters', (err, result) => {
                 callback(null, result);

@@ -5,28 +5,25 @@ const router = express.Router();
 const assert = require('assert');
 const dao = require('./mongo/dao');
 
-function return400(err) {
+function returnFailure(res, err) {
     return res.status(400).send({'error': err});
 }
 
+function returnSuccess(res, message) {
+    return res.status(200).send(message);
+}
+
 router.get('/applicant', (req, res) => {
-    dao.getAllApplicants((err, result) => err ? return400(err) : res.send(result))
+    dao.getAllApplicants((err, result) => err ? returnFailure(res, err) : returnSuccess(res, result))
 });
 
 router.post('/applicant', (req, res) => {
-    if (req.body == {}) {
-        return return400('No body');
-    } else {
-        dao.insertApplicant(req.body, (err) => err ? return400(err) : res.status(200).send('Success'));
-    }
+    if (req.body == {}) return returnFailure('No body');
+    else dao.insertApplicant(req.body, (err) => err ? returnFailure(res, err) : returnSuccess(res, 'Success'));
 });
 
-router.post('/search', (req, res) => {
-    if (req.body === {}) return return400('No Body');
-    else {
-
-        res.json(search.get_matching_shelters(req.body));
-    }
+router.get('/search', (req, res) => {
+    dao.getShelterDetails((err, result) => err ? returnFailure(res, err) : returnSuccess(res, result));
 });
 
 module.exports = router;
