@@ -1,27 +1,35 @@
 import React from 'react';
 import {Button, FormGroup, ControlLabel, FormControl, CheckBox} from 'react-bootstrap';
 var DatePicker = require('react-bootstrap-date-picker');
+import Typeahead from 'react-bootstrap-typeahead';
+import referenceData from '../util/referenceData';
 const request = require('superagent');
 
 const PersonApplicationComponent = React.createClass({
     getInitialState() {
         return {
             application: {
-                gender: '',
-                firstName: '',
-                lastName: '',
-                middleName: '',
-                dob: '',
-                address: '',
-                phoneNumber: '',
-                email: '',
-                veteranStatus: '',
-                yearEntered: '',
-                yearSeparated: '',
-                theater: '',
-                branch: '',
-                dischargeStatus: '',
-                employed: '',
+                gender: [],
+                ethnicity: [],
+                veteranStatus: [],
+                theater: [],
+                branch: [],
+                dischargeStatus: [],
+                housingStatus: [],
+                employed: [],
+                employmentType: [],
+                reasonNotEmployed: [],
+                schoolStatus: [],
+                lastGradeCompleted: [],
+                generalHealth: [],
+                dentalHealth: [],
+                mentalHealth: [],
+                domesticViolence: [],
+                fleeingDomesticViolence: [],
+                pregnant: [],
+                disabled: [],
+                disabilityType:[],
+                receivingCare: [],
                 services: []
             }
         };
@@ -42,6 +50,8 @@ const PersonApplicationComponent = React.createClass({
         this.setState({application: application});
     },
     renderDemographicInformation() {
+
+
         return (
             <div>
                 <div className="row">
@@ -75,39 +85,22 @@ const PersonApplicationComponent = React.createClass({
                 </div>
                 <div className="row">
                     <div className="col-md-4">
-                        <FormGroup controlId="genderSelect">
-                              <ControlLabel>Gender</ControlLabel>
-                              <FormControl componentClass="select" placeholder="Gender"
-                                  value={this.state.application.gender}
-                                  onChange={(event) => {this.handleChange('gender', event.target.value);}}>
-                                    <option value=""></option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                    <option value="transAmab">Trans AMAB</option>
-                                    <option value="transAfab">Trans AFAB</option>
-                                    <option value="transNb">Trans Non-Binary</option>
-                                    <option value="other">Other</option>
-                                    <option value="noAnswer">Prefer Not To Answer</option>
-                              </FormControl>
-                        </FormGroup>
+                        <ControlLabel>Gender</ControlLabel>
+                        <Typeahead
+                            placeholder="Select your gender"
+                            onChange={(value) => {this.handleChange('gender', value);}}
+                            options={referenceData.genders}
+                            selected={this.state.application.gender}
+                        />
                     </div>
                     <div className="col-md-4">
-                        <FormGroup controlId="ethnicitySelect">
-                              <ControlLabel>Ethnicity</ControlLabel>
-                              <FormControl componentClass="select" placeholder="Ethnicity"
-                                  value={this.state.application.ethnicity}
-                                  onChange={(event) => {this.handleChange('ethnicity', event.target.value);}}>
-                                    <option value=""></option>
-                                    <option value="white">White</option>
-                                    <option value="black">Black</option>
-                                    <option value="asian">Asian</option>
-                                    <option value="hispanic">Hispanic</option>
-                                    <option value="AmInd">American Indian or Alaska Native</option>
-                                    <option value="nativeHiOtherPacific">Native Hawaiian or Other Pacific Islander</option>
-                                    <option value="other">Other</option>
-                                    <option value="noAnswer">Prefer Not To Answer</option>
-                              </FormControl>
-                        </FormGroup>
+                          <ControlLabel>Ethnicity</ControlLabel>
+                          <Typeahead
+                              placeholder="Select your ethnicity"
+                              onChange={(value) => {this.handleChange('ethnicity', value);}}
+                              options={referenceData.ethnicities}
+                              selected={this.state.application.ethnicity}
+                          />
                     </div>
                     <div className="col-md-4">
                         <FormGroup controlId="dateOfBirth">
@@ -154,40 +147,18 @@ const PersonApplicationComponent = React.createClass({
         );
     },
     renderVeteranQuestions() {
-        if(this.state.application.veteranStatus !== 'yes') {
-            return(
-                <div className="row">
-                    <div className="col-md-4">
-                        <FormGroup controlId="veteranStatus">
-                            <ControlLabel>Are you a Veteran</ControlLabel>
-                            <FormControl componentClass='select'
-                                value={this.state.application.veteranStatus}
-                                onChange={(event) => {this.handleChange('veteranStatus', event.target.value);}}>
-                                <option value=""></option>
-                                <option value="yes">Yes</option>
-                                <option value="no">No</option>
-                                <option value="noAnswer">Prefer not to answer</option>
-                            </FormControl>
-                        </FormGroup>
-                    </div>
-                </div>
-            );
-        } else {
+        if(this.state.application.veteranStatus.includes('Yes')) {
             return (
                 <div>
                     <div className="row">
                         <div className="col-md-4">
-                            <FormGroup controlId="veteranStatus">
-                                <ControlLabel>Are you a Veteran</ControlLabel>
-                                <FormControl componentClass='select'
-                                    value={this.state.application.veteranStatus}
-                                    onChange={(event) => {this.handleChange('veteranStatus', event.target.value);}}>
-                                    <option value=""></option>
-                                    <option value="yes">Yes</option>
-                                    <option value="no">No</option>
-                                    <option value="noAnswer">Prefer not to answer</option>
-                                </FormControl>
-                            </FormGroup>
+                            <ControlLabel>Are you a Veteran</ControlLabel>
+                            <Typeahead
+                                placeholder="Are you a Veteran"
+                                onChange={(value) => {this.handleChange('veteranStatus', value);}}
+                                options={referenceData.yesNoOptions}
+                                selected={this.state.application.veteranStatus}
+                            />
                         </div>
                         <div className="col-md-4">
                             <FormGroup controlId="yearEntered">
@@ -210,56 +181,46 @@ const PersonApplicationComponent = React.createClass({
                     </div>
                     <div className="row">
                         <div className="col-md-4">
-                            <FormGroup controlId="theaterSelect">
-                                  <ControlLabel>Theater</ControlLabel>
-                                  <FormControl componentClass="select" placeholder="Theater"
-                                      value={this.state.application.theater}
-                                      onChange={(event) => {this.handleChange('theater', event.target.value);}}>
-                                        <option value=""></option>
-                                        <option value="ww2">World War II</option>
-                                        <option value="korean">Korean War</option>
-                                        <option value="vietnam">Vietnam War</option>
-                                        <option value="desertStorm">Desert Storm</option>
-                                        <option value="afghanistanOef">Afghanistan OEF</option>
-                                        <option value="iraqOif">Iraq OIF</option>
-                                        <option value="iraqOnd">Iraq OND</option>
-                                        <option value="other">Other</option>
-                                  </FormControl>
-                            </FormGroup>
+                            <ControlLabel>Theater</ControlLabel>
+                            <Typeahead
+                                placeholder="Theater"
+                                onChange={(value) => {this.handleChange('theater', value);}}
+                                options={referenceData.theater}
+                                selected={this.state.application.theater}
+                            />
                         </div>
                         <div className="col-md-4">
-                            <FormGroup controlId="branchSelect">
-                                  <ControlLabel>Branch</ControlLabel>
-                                  <FormControl componentClass="select" placeholder="Branch"
-                                      value={this.state.application.branch}
-                                      onChange={(event) => {this.handleChange('branch', event.target.value);}}>
-                                        <option value=""></option>
-                                        <option value="army">Army</option>
-                                        <option value="airForce">Air Force</option>
-                                        <option value="navy">Navy</option>
-                                        <option value="marines">Marines</option>
-                                        <option value="coastGuard">Coast Guard</option>
-                                        <option value="other">Other</option>
-                                  </FormControl>
-                            </FormGroup>
+                            <ControlLabel>Branch</ControlLabel>
+                            <Typeahead
+                                placeholder="Branch"
+                                onChange={(value) => {this.handleChange('branch', value);}}
+                                options={referenceData.branch}
+                                selected={this.state.application.branch}
+                            />
                         </div>
                         <div className="col-md-4">
-                            <FormGroup controlId="dischargeSelect">
-                                  <ControlLabel>Discharge Status</ControlLabel>
-                                  <FormControl componentClass="select" placeholder="Discharge Status"
-                                      value={this.state.application.dischargeStatus}
-                                      onChange={(event) => {this.handleChange('dischargeStatus', event.target.value);}}>
-                                        <option value=""></option>
-                                        <option value="honorable">Honorable</option>
-                                        <option value="general">General under honorable conditions</option>
-                                        <option value="oth">Under other than honorable conditions</option>
-                                        <option value="badConduct">Bad Conduct</option>
-                                        <option value="dishonorable">Dishonorable</option>
-                                        <option value="uncharacterized">Uncharacterized</option>
-                                        <option value="other">Other</option>
-                                  </FormControl>
-                            </FormGroup>
+                            <ControlLabel>Discharge Status</ControlLabel>
+                            <Typeahead
+                                placeholder="Discharge Status"
+                                onChange={(value) => {this.handleChange('dischargeStatus', value);}}
+                                options={referenceData.dischargeStatus}
+                                selected={this.state.application.dischargeStatus}
+                            />
                         </div>
+                    </div>
+                </div>
+            );
+        } else {
+            return(
+                <div className="row">
+                    <div className="col-md-4">
+                        <ControlLabel>Are you a Veteran</ControlLabel>
+                        <Typeahead
+                            placeholder="Are you a Veteran"
+                            onChange={(value) => {this.handleChange('veteranStatus', value);}}
+                            options={referenceData.yesNoOptions}
+                            selected={this.state.application.veteranStatus}
+                        />
                     </div>
                 </div>
             );
@@ -268,27 +229,18 @@ const PersonApplicationComponent = React.createClass({
     renderHousingQuestion() {
         return (
             <div className='col-md-4'>
-                <FormGroup controlId="housingSelect">
-                      <ControlLabel>Housing Status</ControlLabel>
-                      <FormControl componentClass="select" placeholder="Housing Status"
-                          value={this.state.application.housingStatus}
-                          onChange={(event) => {this.handleChange('housingStatus', event.target.value);}}>
-                            <option value=""></option>
-                            <option value="homeless">Homeless</option>
-                            <option value="atRisk">At imminent risk of homelessness</option>
-                            <option value="federal">Homeless only under other federal statuses</option>
-                            <option value="fleeing">Fleeing Domestic Violence</option>
-                            <option value="stable">Stably housed</option>
-                            <option value="unsure">Unsure</option>
-                            <option value="noAnswer">Prefer not to answer</option>
-                            <option value="other">Other</option>
-                      </FormControl>
-                </FormGroup>
+                <ControlLabel>Housing Status</ControlLabel>
+                <Typeahead
+                    placeholder="Housing Status"
+                    onChange={(value) => {this.handleChange('housingStatus', value);}}
+                    options={referenceData.housing}
+                    selected={this.state.application.housingStatus}
+                />
             </div>
         );
     },
     renderHousing() {
-        if(this.state.application.housingStatus === 'homeless' || this.state.application.housingStatus === 'federal') {
+        if(this.state.application.housingStatus.includes('Homeless') || this.state.application.housingStatus.includes('Homeless only under other federal statuses')) {
             return (
                 <div className="row">
                     {this.renderHousingQuestion()}
@@ -312,57 +264,44 @@ const PersonApplicationComponent = React.createClass({
     renderEmployedQuestion() {
         return (
             <div className="col-md-4">
-                <FormGroup controlId="employedSelect">
-                      <ControlLabel>Are you Employed</ControlLabel>
-                      <FormControl componentClass="select"
-                          value={this.state.application.employed}
-                          onChange={(event) => {this.handleChange('employed', event.target.value);}}>
-                            <option value=""></option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                            <option value="noAnswer">Prefer not to answer</option>
-                      </FormControl>
-                </FormGroup>
+                <ControlLabel>Are you Employed</ControlLabel>
+                <Typeahead
+                    placeholder="Are you Employed"
+                    onChange={(value) => {this.handleChange('employed', value);}}
+                    options={referenceData.yesNoOptions}
+                    selected={this.state.application.employed}
+                />
             </div>
         );
     },
     renderEmployment() {
-        if(this.state.application.employed === 'yes') {
+        if(this.state.application.employed.includes('Yes')) {
             return (
                 <div className='row'>
                     {this.renderEmployedQuestion()}
                     <div className='col-md-4'>
-                        <FormGroup controlId="employmentTypeSelect">
-                              <ControlLabel>Employment Type</ControlLabel>
-                              <FormControl componentClass="select"
-                                  value={this.state.application.employmentType}
-                                  onChange={(event) => {this.handleChange('employmentType', event.target.value);}}>
-                                    <option value=""></option>
-                                    <option value="fullTime">Full-time</option>
-                                    <option value="partTime">Part-time</option>
-                                    <option value="seasonalSporatic">Seasonal or sporatic</option>
-                              </FormControl>
-                        </FormGroup>
+                        <ControlLabel>Employment Type</ControlLabel>
+                        <Typeahead
+                            placeholder="Employment Type"
+                            onChange={(value) => {this.handleChange('employmentType', value);}}
+                            options={referenceData.employmentType}
+                            selected={this.state.application.employmentType}
+                        />
                     </div>
                 </div>
             );
-        } else if(this.state.application.employed === 'no') {
+        } else if(this.state.application.employed.includes('No')) {
             return (
                 <div className='row'>
                     {this.renderEmployedQuestion()}
                     <div className='col-md-4'>
-                        <FormGroup controlId="reasonNotEmployedSelect">
-                              <ControlLabel>Reason not employed</ControlLabel>
-                              <FormControl componentClass="select"
-                                  value={this.state.application.reasonNotEmployed}
-                                  onChange={(event) => {this.handleChange('reasonNotEmployed', event.target.value);}}>
-                                    <option value=""></option>
-                                    <option value="looking">Looking for work</option>
-                                    <option value="school">In school</option>
-                                    <option value="unable">Unable to work</option>
-                                    <option value="notLooking">Not looking for work</option>
-                              </FormControl>
-                        </FormGroup>
+                        <ControlLabel>Reason not employed</ControlLabel>
+                        <Typeahead
+                            placeholder="Reason not employed"
+                            onChange={(value) => {this.handleChange('reasonNotEmployed', value);}}
+                            options={referenceData.notWorkingReasons}
+                            selected={this.state.application.reasonNotEmployed}
+                        />
                     </div>
                 </div>
             );
@@ -378,45 +317,22 @@ const PersonApplicationComponent = React.createClass({
         return (
             <div className='row'>
                 <div className='col-md-4'>
-                    <FormGroup controlId="schoolStatusSelect">
-                          <ControlLabel>School Status</ControlLabel>
-                          <FormControl componentClass="select"
-                              value={this.state.application.schoolStatus}
-                              onChange={(event) => {this.handleChange('schoolStatus', event.target.value);}}>
-                                <option value=""></option>
-                                <option value="attendingRegularly">Attending school regularly</option>
-                                <option value="attendingIrregularly">Attending school irregularly</option>
-                                <option value="graduateHs">Graduated from High School</option>
-                                <option value="ged">Obtained GED</option>
-                                <option value="droppedOut">Dropped out</option>
-                                <option value="suspended">Suspended</option>
-                                <option value="expelled">Expelled</option>
-                                <option value="unsure">Unsure</option>
-                                <option value="noAnswer">Prefer not to answer</option>
-                                <option value="other">Other</option>
-                          </FormControl>
-                    </FormGroup>
+                    <ControlLabel>School Status</ControlLabel>
+                    <Typeahead
+                        placeholder="School Status"
+                        onChange={(value) => {this.handleChange('schoolStatus', value);}}
+                        options={referenceData.schoolStatus}
+                        selected={this.state.application.schoolStatus}
+                    />
                 </div>
                 <div className='col-md-4'>
-                    <FormGroup controlId="lastGradeSelect">
-                          <ControlLabel>Last Grade Completed</ControlLabel>
-                          <FormControl componentClass="select"
-                              value={this.state.application.lastGrade}
-                              onChange={(event) => {this.handleChange('lastGrade', event.target.value);}}>
-                                <option value=""></option>
-                                <option value="lessThanFifth">Less than 5th grade</option>
-                                <option value="fiveToSix">Grades 5-6</option>
-                                <option value="sevenToEight">Grades 7-8</option>
-                                <option value="nineToEleven">Grades 9-11</option>
-                                <option value="twelve">Grade 12</option>
-                                <option value="noLevels">School program does not have grade levels</option>
-                                <option value="ged">GED</option>
-                                <option value="someCollege">Some College</option>
-                                <option value="unsure">Unsure</option>
-                                <option value="noAnswer">Prefer not to answer</option>
-                                <option value="other">Other</option>
-                          </FormControl>
-                    </FormGroup>
+                    <ControlLabel>Last Grade Completed</ControlLabel>
+                    <Typeahead
+                        placeholder="Last Grade Completed"
+                        onChange={(value) => {this.handleChange('lastGrade', value);}}
+                        options={referenceData.lastGradeCompleted}
+                        selected={this.state.application.lastGrade}
+                    />
                 </div>
             </div>
         );
@@ -425,55 +341,31 @@ const PersonApplicationComponent = React.createClass({
         return (
             <div className='row'>
                 <div className='col-md-4'>
-                    <FormGroup controlId="generalHealthSelect">
-                          <ControlLabel>General Health</ControlLabel>
-                          <FormControl componentClass="select"
-                              value={this.state.application.generalHealth}
-                              onChange={(event) => {this.handleChange('generalHealth', event.target.value);}}>
-                                <option value=""></option>
-                                <option value="excelent">Excelent</option>
-                                <option value="veryGood">Very Good</option>
-                                <option value="good">Good</option>
-                                <option value="fair">Fair</option>
-                                <option value="poor">Poor</option>
-                                <option value="unsure">Unsure</option>
-                                <option value="noAnswer">Prefer not to answer</option>
-                          </FormControl>
-                    </FormGroup>
+                    <ControlLabel>General Health</ControlLabel>
+                    <Typeahead
+                        placeholder="General Health"
+                        onChange={(value) => {this.handleChange('generalHealth', value);}}
+                        options={referenceData.healthStatus}
+                        selected={this.state.application.generalHealth}
+                    />
                 </div>
                 <div className='col-md-4'>
-                    <FormGroup controlId="dentalHealthSelect">
-                          <ControlLabel>Dental Health</ControlLabel>
-                          <FormControl componentClass="select"
-                              value={this.state.application.dentalHealth}
-                              onChange={(event) => {this.handleChange('dentalHealth', event.target.value);}}>
-                                <option value=""></option>
-                                <option value="excelent">Excelent</option>
-                                <option value="veryGood">Very Good</option>
-                                <option value="good">Good</option>
-                                <option value="fair">Fair</option>
-                                <option value="poor">Poor</option>
-                                <option value="unsure">Unsure</option>
-                                <option value="noAnswer">Prefer not to answer</option>
-                          </FormControl>
-                    </FormGroup>
+                    <ControlLabel>Dental Health</ControlLabel>
+                    <Typeahead
+                        placeholder="Dental Health"
+                        onChange={(value) => {this.handleChange('dentalHealth', value);}}
+                        options={referenceData.healthStatus}
+                        selected={this.state.application.dentalHealth}
+                    />
                 </div>
                 <div className='col-md-4'>
-                    <FormGroup controlId="mentalHealthSelect">
-                          <ControlLabel>Mental Health</ControlLabel>
-                          <FormControl componentClass="select"
-                              value={this.state.application.mentalHealth}
-                              onChange={(event) => {this.handleChange('mentalHealth', event.target.value);}}>
-                                <option value=""></option>
-                                <option value="excelent">Excelent</option>
-                                <option value="veryGood">Very Good</option>
-                                <option value="good">Good</option>
-                                <option value="fair">Fair</option>
-                                <option value="poor">Poor</option>
-                                <option value="unsure">Unsure</option>
-                                <option value="noAnswer">Prefer not to answer</option>
-                          </FormControl>
-                    </FormGroup>
+                    <ControlLabel>Mental Health</ControlLabel>
+                    <Typeahead
+                        placeholder="Mental Health"
+                        onChange={(value) => {this.handleChange('mentalHealth', value);}}
+                        options={referenceData.healthStatus}
+                        selected={this.state.application.mentalHealth}
+                    />
                 </div>
             </div>
         );
@@ -481,22 +373,18 @@ const PersonApplicationComponent = React.createClass({
     renderDomesticViolenceQuestion() {
         return (
             <div className='col-md-4'>
-                <FormGroup controlId="domesticViolenceSelect">
-                      <ControlLabel>Domestic Violence Victim</ControlLabel>
-                      <FormControl componentClass="select"
-                          value={this.state.application.domesticViolence}
-                          onChange={(event) => {this.handleChange('domesticViolence', event.target.value);}}>
-                            <option value=""></option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                            <option value="noAnswer">Prefer not to answer</option>
-                      </FormControl>
-                </FormGroup>
+                <ControlLabel>Victim of Domestic Violene</ControlLabel>
+                <Typeahead
+                    placeholder="Victem of Domestic Violence"
+                    onChange={(value) => {this.handleChange('domesticViolence', value);}}
+                    options={referenceData.yesNoOptions}
+                    selected={this.state.application.domesticViolence}
+                />
             </div>
         );
     },
     renderDomesticViolence() {
-        if(this.state.application.domesticViolence === 'yes') {
+        if(this.state.application.domesticViolence.includes('Yes')) {
             return (
                 <div className='row'>
                     {this.renderDomesticViolenceQuestion()}
@@ -508,17 +396,13 @@ const PersonApplicationComponent = React.createClass({
                         </FormGroup>
                     </div>
                     <div className='col-md-4'>
-                        <FormGroup controlId="fleeingDomesticViolenceSelect">
-                              <ControlLabel>Currently Fleeing Domestic Violence</ControlLabel>
-                              <FormControl componentClass="select"
-                                  value={this.state.application.fleeingDomesticViolence}
-                                  onChange={(event) => {this.handleChange('fleeingDomesticViolence', event.target.value);}}>
-                                    <option value=""></option>
-                                    <option value="yes">Yes</option>
-                                    <option value="no">No</option>
-                                    <option value="noAnswer">Prefer not to answer</option>
-                              </FormControl>
-                        </FormGroup>
+                        <ControlLabel>Currently Fleeing</ControlLabel>
+                        <Typeahead
+                            placeholder="Currently Fleeing"
+                            onChange={(value) => {this.handleChange('fleeingDomesticViolence', value);}}
+                            options={referenceData.yesNoOptions}
+                            selected={this.state.application.fleeingDomesticViolence}
+                        />
                     </div>
                 </div>
             );
@@ -533,22 +417,18 @@ const PersonApplicationComponent = React.createClass({
     renderPregnancyQuestion() {
         return (
             <div className='col-md-4'>
-                <FormGroup controlId="pregnantSelect">
-                      <ControlLabel>Are you pregnant</ControlLabel>
-                      <FormControl componentClass="select"
-                          value={this.state.application.pregnant}
-                          onChange={(event) => {this.handleChange('pregnant', event.target.value);}}>
-                            <option value=""></option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                            <option value="noAnswer">Prefer not to answer</option>
-                      </FormControl>
-                </FormGroup>
+                <ControlLabel>Are you pregnant</ControlLabel>
+                <Typeahead
+                    placeholder="Are you pregnant"
+                    onChange={(value) => {this.handleChange('pregnant', value);}}
+                    options={referenceData.yesNoOptions}
+                    selected={this.state.application.pregnant}
+                />
             </div>
         );
     },
     renderPregnancy() {
-        if(this.state.application.pregnant === 'yes') {
+        if(this.state.application.pregnant.includes('Yes')) {
             return (
                 <div className='row'>
                     {this.renderPregnancyQuestion()}
@@ -572,55 +452,38 @@ const PersonApplicationComponent = React.createClass({
     renderDisabilityQuestion() {
         return (
             <div className='col-md-4'>
-                <FormGroup controlId="disabledSelect">
-                      <ControlLabel>Are you disabled</ControlLabel>
-                      <FormControl componentClass="select"
-                          value={this.state.application.disabled}
-                          onChange={(event) => {this.handleChange('disabled', event.target.value);}}>
-                            <option value=""></option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                            <option value="noAnswer">Prefer not to answer</option>
-                      </FormControl>
-                </FormGroup>
+                <ControlLabel>Are you disabled</ControlLabel>
+                <Typeahead
+                    placeholder="Are you disabled"
+                    onChange={(value) => {this.handleChange('disabled', value);}}
+                    options={referenceData.yesNoOptions}
+                    selected={this.state.application.disabled}
+                />
             </div>
         );
     },
     renderDisability() {
-        if(this.state.application.disabled === 'yes') {
+        if(this.state.application.disabled.includes('Yes')) {
             return (
                 <div className='row'>
                     {this.renderDisabilityQuestion()}
                     <div className='col-md-4'>
-                        <FormGroup controlId="disabilityTypeSelect">
-                              <ControlLabel>Disability Type</ControlLabel>
-                              <FormControl componentClass="select"
-                                  value={this.state.application.disabilityType}
-                                  onChange={(event) => {this.handleChange('disabilityType', event.target.value);}}>
-                                    <option value=""></option>
-                                    <option value="physical">Physical Disability</option>
-                                    <option value="developmental">Developmental Disability</option>
-                                    <option value="chronic">Chronic Health Condition</option>
-                                    <option value="hivAids">HIV/AIDS</option>
-                                    <option value="mental">Mental Health Problems</option>
-                                    <option value="substance">Substance Abuse</option>
-                                    <option value="noAnswer">Prefer not to answer</option>
-                                    <option value="other">Other</option>
-                              </FormControl>
-                        </FormGroup>
+                        <ControlLabel>Disability Type</ControlLabel>
+                        <Typeahead
+                            placeholder="Disability Type"
+                            onChange={(value) => {this.handleChange('disabilityType', value);}}
+                            options={referenceData.disabilityType}
+                            selected={this.state.application.disabilityType}
+                        />
                     </div>
                     <div className='col-md-4'>
-                        <FormGroup controlId="receivingCareSelect">
-                              <ControlLabel>Are you receiving care</ControlLabel>
-                              <FormControl componentClass="select"
-                                  value={this.state.application.receivingCare}
-                                  onChange={(event) => {this.handleChange('receivingCare', event.target.value);}}>
-                                    <option value=""></option>
-                                    <option value="yes">Yes</option>
-                                    <option value="no">No</option>
-                                    <option value="noAnswer">Prefer not to answer</option>
-                              </FormControl>
-                        </FormGroup>
+                        <ControlLabel>Are you receiving care</ControlLabel>
+                        <Typeahead
+                            placeholder="Are you receiving care"
+                            onChange={(value) => {this.handleChange('receivingCare', value);}}
+                            options={referenceData.yesNoOptions}
+                            selected={this.state.application.receivingCare}
+                        />
                     </div>
                 </div>
             );

@@ -1,0 +1,31 @@
+const referenceData = {
+    genders: ['', 'Male', 'Female', 'Transgender AMAB', 'Transgender AFAB',
+                'Transgender Non-Binary', 'Prefer not to answer', 'Other'],
+    ethnicities: ['', 'White', 'Black', 'Asian', 'Hispanic', 'American Indian or Alaska Native',
+                    'Native Hawaiian or Other Pacific Islander', 'Prefer not to answer', 'Other'],
+    yesNoOptions: ['', 'Yes', 'No', 'Prefer not to answer'],
+    theater: ['', 'World War II', 'Korean War', 'Vietnam War',
+                'Desert Storm', 'Afghanistan OEF', 'Iraq OIF',
+                'Iraq OND', 'Other'],
+    branch: ['', 'Army', 'Air Force', 'Navy', 'Marines', 'Coast Guard', 'Other'],
+    dischargeStatus: ['', 'Honorable', 'General under honorable conditions',
+                        'Under other than honorable conditions', 'Bad conduct',
+                        'Dishonorable', 'Uncharacterized', 'Other'],
+    housing: ['', 'Homeless', 'At imminent rist of homelessness',
+                'Homeless only under other federal statuses', 'Fleeing domestic violence',
+                'Stably housed', 'Prefer not to answer', 'Other'],
+    employmentType: ['', 'Full-time', 'Part-time', 'Seasonal or sporatic'],
+    notWorkingReasons: ['', 'Looking for work', 'In school', 'Unable to work', 'Not looking for work'],
+    schoolStatus: ['', 'Attending school regularly', 'Attending school irregularly', 'Graduated from High School',
+                    'Obtained GED', 'Dropped out', 'Suspended', 'Expelled',
+                    'Prefer not to answer', 'Other'],
+    lastGradeCompleted: ['', 'Less than 5th grade', 'Grades 5-6', 'Grades 7-8',
+                            'Grades 9-11', 'Grade 12', 'School program does not have grade levels',
+                            'GED', 'Some College', 'Unsure', 'Prefer not to answer', 'Other'],
+    healthStatus: ['', 'Excelent', 'Very Good', 'Good', 'Fair', 'Poor', 'Prefer not to answer'],
+    disabilityType: ['', 'Physical Disibility', 'Developmental Disability', 'Chronic Health Condition',
+                        'HIV/AIDS', 'Mental Health Problems', 'Substance Abuse',
+                        'Prefer not to answer', 'Other']
+};
+
+module.exports = referenceData;
