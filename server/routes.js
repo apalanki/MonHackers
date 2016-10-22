@@ -17,6 +17,10 @@ router.get('/applicant', (req, res) => {
     dao.getAllApplicants((err, result) => err ? returnFailure(res, err) : returnSuccess(res, result));
 });
 
+router.get('/people', (req, res) => {
+    dao.getAllPeople((err, result) => err ? returnFailure(res, err) : returnSuccess(res, result));
+});
+
 router.post('/applicant', (req, res) => {
     if (req.body == {}) return returnFailure('No body');
     else dao.insertApplicant(req.body, (err) => err ? returnFailure(res, err) : returnSuccess(res, 'Success'));
