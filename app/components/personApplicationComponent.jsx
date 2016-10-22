@@ -8,6 +8,7 @@ const request = require('superagent');
 const PersonApplicationComponent = React.createClass({
     getInitialState() {
         return {
+            fullForm: false,
             application: {
                 gender: [],
                 ethnicity: [],
@@ -544,13 +545,16 @@ const PersonApplicationComponent = React.createClass({
                 }
             });
     },
-    render() {
+    renderFullForm() {
         return (
             <div>
                 <form>
                     <div className="row">
-                        <div className="col-md-12">
+                        <div className="col-md-8">
                             <h2>Application For Services</h2>
+                        </div>
+                        <div className="col-md-4">
+                            <input type="checkbox" checked={this.state.fullForm} value="fullForm" onChange={(event) => {this.setState({fullForm: !this.state.fullForm});}} /> Full Form
                         </div>
                     </div>
                     <div className="row">
@@ -621,6 +625,56 @@ const PersonApplicationComponent = React.createClass({
                 </form>
             </div>
         );
+    },
+    renderShortForm() {
+        return (
+            <div>
+                <form>
+                    <div className="row">
+                        <div className="col-md-8">
+                            <h2>Application For Services</h2>
+                        </div>
+                        <div className="col-md-4">
+                            <input type="checkbox" checked={this.state.fullForm} value="fullForm" onChange={(event) => {this.setState({fullForm: !this.state.fullForm});}} /> Full Form
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-12">
+                            <h4>Demographic Information</h4>
+                        </div>
+                    </div>
+                    {this.renderDemographicInformation()}
+                    <div className='row'>
+                        <div className="col-md-12">
+                            <h4>Contact Information</h4>
+                        </div>
+                    </div>
+                    {this.renderContactInformation()}
+                    <div className="row">
+                        <div className="col-md-12">
+                            <h4>Services Needed</h4>
+                        </div>
+                    </div>
+                    {this.renderServices()}
+                    <div className="row">
+                        <div className="col-md-4">
+                            <Button id="saveButton"
+                                    bsStyle='primary'
+                                    onClick={this.saveApplication}>
+                                Save
+                            </Button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        );
+    },
+    render() {
+        if(this.state.fullForm) {
+            return this.renderFullForm();
+        } else {
+            return this.renderShortForm();
+        }
     }
 });
 
