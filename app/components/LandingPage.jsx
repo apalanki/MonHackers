@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 export default class LandingPage extends React.Component{
 	render(){
@@ -21,7 +22,7 @@ export default class LandingPage extends React.Component{
 					</div>
 					<img src = "./INeedHelp.png" />
 					<div className="card-block">
-						<p className="card-text" >Find services near you that meet your needs and apply for services.</p>
+						<p className="card-text" ><Link to="homeless_map">Find services near you</Link> that meet your needs or <Link to="application">apply for services.</Link></p>
 					</div>
 				</div>
 
