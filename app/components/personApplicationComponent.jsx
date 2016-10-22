@@ -554,7 +554,7 @@ const PersonApplicationComponent = React.createClass({
                             <h2>Application For Services</h2>
                         </div>
                         <div className="col-md-4">
-                            <input type="checkbox" checked={this.state.fullForm} value="fullForm" onChange={(event) => {this.setState({fullForm: !this.state.fullForm});}} /> Full Form
+                            <input type="checkbox" checked={this.state.fullForm} value="fullForm" onChange={() => {this.setState({fullForm: !this.state.fullForm});}} /> Full Form
                         </div>
                     </div>
                     <div className="row">
@@ -635,7 +635,7 @@ const PersonApplicationComponent = React.createClass({
                             <h2>Application For Services</h2>
                         </div>
                         <div className="col-md-4">
-                            <input type="checkbox" checked={this.state.fullForm} value="fullForm" onChange={(event) => {this.setState({fullForm: !this.state.fullForm});}} /> Full Form
+                            <input type="checkbox" checked={this.state.fullForm} value="fullForm" onChange={() => {this.setState({fullForm: !this.state.fullForm});}} /> Full Form
                         </div>
                     </div>
                     <div className="row">

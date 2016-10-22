@@ -4,7 +4,6 @@ const express = require('express');
 const router = express.Router();
 const dao = require('./mongo/dao');
 const geoCodeData = require('./geocode/geocodeData');
-const logger = require('log4js').getLogger();
 
 function returnFailure(res, err) {
     return res.status(400).send({'error': err});
@@ -16,6 +15,10 @@ function returnSuccess(res, message) {
 
 router.get('/applicant', (req, res) => {
     dao.getAllApplicants((err, result) => err ? returnFailure(res, err) : returnSuccess(res, result));
+});
+
+router.get('/people', (req, res) => {
+    dao.getAllPeople((err, result) => err ? returnFailure(res, err) : returnSuccess(res, result));
 });
 
 router.post('/applicant', (req, res) => {

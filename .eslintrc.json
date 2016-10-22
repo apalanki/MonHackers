@@ -27,7 +27,7 @@
       "error",
       "unix"
     ],
-    "no-console": 0,
+    "no-console": 1,
     "react/prop-types": 0,
     "quotes": [
       "warn",
