@@ -45,7 +45,7 @@ function isDefined(data) {
     return data !== 'Unspecified';
 }
 
-function getShelterDetails(requestQuery, callback) {
+function shelterSearch(requestQuery, callback) {
     var query = {};
     if (isDefined(requestQuery['gender'])) {
         requestQuery.gender === 'Female'
@@ -63,6 +63,6 @@ function getShelterDetails(requestQuery, callback) {
 module.exports = {
     getAllApplicants: getAllApplicants,
     insertApplicant: insertApplicant,
-    getShelterDetails: getShelterDetails,
+    shelterSearch: shelterSearch,
     getAllPeople: getAllPeople
 };
