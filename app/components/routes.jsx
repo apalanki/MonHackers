@@ -1,9 +1,9 @@
 import {Router, Route, browserHistory} from 'react-router';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Main from './main.jsx';
 import Goodbye from './goodbye.jsx';
 let MapSearchPage = require('./homelessMap/MapSearchPage.jsx');
+const Main = require('./main.jsx');
 
 const routes =
     <Route path="/gh6" component={Main}>

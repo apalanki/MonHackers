@@ -18,6 +18,7 @@ gulp.task('bundle', function() {
 gulp.task('copy', function() {
     return gulp.src(['app/index.html',
         'node_modules/bootstrap/dist/css/bootstrap.min.css',
+        'node_modules/socket.io-client/socket.io.js',
         'app/styles/style.css']).pipe(gulp.dest('deploy'));
 });
 
