@@ -1,8 +1,5 @@
-'use strict';
-var search = require('./shelter_search.js');
 const express = require('express');
 const router = express.Router();
-const assert = require('assert');
 const dao = require('./mongo/dao');
 
 function returnFailure(res, err) {
@@ -14,7 +11,7 @@ function returnSuccess(res, message) {
 }
 
 router.get('/applicant', (req, res) => {
-    dao.getAllApplicants((err, result) => err ? returnFailure(res, err) : returnSuccess(res, result))
+    dao.getAllApplicants((err, result) => err ? returnFailure(res, err) : returnSuccess(res, result));
 });
 
 router.post('/applicant', (req, res) => {
@@ -23,7 +20,10 @@ router.post('/applicant', (req, res) => {
 });
 
 router.get('/search', (req, res) => {
-    dao.getShelterDetails((err, result) => err ? returnFailure(res, err) : returnSuccess(res, result));
+    dao.getShelterDetails((err, result) => {
+        if(err) returnFailure(res, err);
+        else returnSuccess(res, result);
+    });
 });
 
 module.exports = router;

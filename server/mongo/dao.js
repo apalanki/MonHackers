@@ -1,18 +1,11 @@
-/**
- * Created by anudeeppalanki on 10/22/16.
- */
-
 const find = require('./util/find');
-// const insert = require('./util/insert');
-const MongoClient = require('mongodb').MongoClient,
-    assert = require('assert');
+const MongoClient = require('mongodb').MongoClient;
 
 // Connection URL
 const url = 'mongodb://monhackers:monhackers@ds023603.mlab.com:23603/globalhack6';
 
 function getAllApplicants(callback) {
     MongoClient.connect(url, function (err, db) {
-        assert.equal(null, err);
         if (err) {
             callback(err);
         }
@@ -27,7 +20,6 @@ function getAllApplicants(callback) {
 
 function insertApplicant(applicant, callback) {
     MongoClient.connect(url, function (err, db) {
-        assert.equal(null, err);
         if (err) callback(err);
         else {
             const col = db.collection('applicants');
@@ -38,7 +30,7 @@ function insertApplicant(applicant, callback) {
     });
 }
 
-function getShelterDetails(callback){
+function getShelterDetails(callback) {
     MongoClient.connect(url, function (err, db) {
         if (err) callback(err);
         else {
