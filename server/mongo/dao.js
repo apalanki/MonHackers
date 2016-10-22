@@ -7,30 +7,26 @@ const handle = (err, result, callback) => {
     else callback(null, result);
 }
 
-function getAllPeople(callback) {
-    console.log("getting all people");
-    MongoClient.connect(url, function (err, db) {
-        if (err) {
-            callback(err);
-        }
-        else {
-            find(db, 'people', {}, (err, result) => {
-                handle(err,result,callback);
-            });
-        }
-        db.close();
-    });
-}
-function getAllApplicants(callback) {
+const getAll = (collectionName, callback) => {
     MongoClient.connect(url, function (err, db) {
         if (err) callback(err);
-        else {
-            find(db, 'applicants', {}, (err, result) => {
+        else{
+            db.collection(collectionName).find().toArray((err, result) => {
                 handle(err,result,callback);
+                db.close();
             });
         }
-        db.close();
     });
+}
+
+function getAllPeople(callback) {
+    console.log("getting all people");
+    getAll('people', callback);
+}
+
+function getAllApplicants(callback) {
+    console.log("getting all applicants");
+    getAll('applicant', callback);
 }
 
 function insertApplicant(applicant, callback) {
