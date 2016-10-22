@@ -20,7 +20,7 @@ gulp.task('copy', function() {
         'node_modules/bootstrap/dist/css/bootstrap.min.css',
         'node_modules/bootstrap/dist/css/bootstrap.min.css.map',
         'node_modules/socket.io-client/socket.io.js',
-        'app/styles/style.css', 'app/assets/stlSkyline.jpg']).pipe(gulp.dest('deploy'));
+        'app/styles/style.css', 'app/assets/*']).pipe(gulp.dest('deploy'));
 });
 
 gulp.task('default', ['bundle', 'copy'], function() {

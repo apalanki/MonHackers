@@ -84,7 +84,9 @@
 .nav-title {
 	color: #337ab7!important;
 	font-size: 50px;
-	padding-top: 25px;
+	padding-top: 30px;
+	font-family: 'Calligraffitti', cursive;
+
 }
 
 .service-link {
@@ -96,10 +98,11 @@
 }
 
 .stl-skyline {
-	width:100vw;
-	height:100vh;
+	width:100%;
+	height:100%;
 	background-image: url('./stlSkyline.jpg');
 	background-size:cover;
+	padding-bottom:200px;
 }
 
 .top-padding {
@@ -110,4 +113,74 @@
 	font-size: 40px;
 	font-weight: lighter;
 	color:blue;
+}
+
+#saveButton{
+	margin-top: 25px;
+} 
+
+.form-header{
+	padding-bottom: 15px;
+}
+
+.application-header{
+	padding-bottom: 10px;
+}
+
+.hr{
+	border-bottom: solid 2px lightgray;
+	padding:0 5px;
+}
+
+
+.card {
+  opacity: 0.75;
+  border: 1px solid rgba(0,0,0,.125);
+  margin-bottom: .75rem;
+  border-radius: 5px;
+  width: 218.0156px;
+  flex:1;
+  margin-right:10px;
+  margin-left:10px;
+  background-color: white;
+  text-align: center;
+}
+
+.card:hover{
+	opacity: 1;
+}
+
+.card-block {
+  padding: 1.25rem;
+}
+.card-title {
+  margin-bottom: .75rem;
+  margin-top: 0;
+  line-height:1.4;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+.card-header {
+    background-color: #f6f8f8;
+    padding: 3px;
+}
+
+.cards {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-top: 15px;
+  //padding: 1.5%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  align-items: stretch;
+  margin-top:120px;
+}
+
+.card img{
+	padding-top:10px;
 }
