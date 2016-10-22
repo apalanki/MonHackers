@@ -27,7 +27,12 @@ router.post('/applicant', (req, res) => {
 });
 
 router.get('/search', (req, res) => {
-    dao.getShelterDetails(req.query, (err, result) => err ? returnFailure(res, err) : returnSuccess(res, result));
+    dao.getShelterDetails(
+    	req.query, 
+    	(err, result) => {
+    		err ? returnFailure(res, err) : 
+    			returnSuccess(res, result));
+		}
 });
 
 module.exports = router;
