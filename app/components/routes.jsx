@@ -4,10 +4,12 @@ import ReactDOM from 'react-dom';
 import Main from './main.jsx';
 import Goodbye from './goodbye.jsx';
 let MapSearchPage = require('./homelessMap/MapSearchPage.jsx');
+import PersonApplicationComponent from './personApplicationComponent.jsx';
 
 const routes =
     <Route path="/gh6" component={Main}>
         <Route name="goodbye" path="/goodbye" component={Goodbye}/>
+        <Route name="person" path="/person" component= {PersonApplicationComponent} />
         <Route name="homeless_map" path="/homeless_map" component={MapSearchPage}/>
     </Route>;
 

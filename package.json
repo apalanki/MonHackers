@@ -43,6 +43,7 @@
     "node-uuid": "^1.4.7",
     "react": "^15.3.2",
     "react-bootstrap": "^0.30.5",
+    "react-bootstrap-date-picker": "^3.7.0",
     "react-dom": "^15.3.2",
     "react-pure-render": "^1.0.2",
     "react-router": "^2.8.1",

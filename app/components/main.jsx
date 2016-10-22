@@ -8,6 +8,8 @@ export default class Main extends React.Component{
 				<Link to="goodbye">Good Bye</Link>
 				<br/>
                 <Link to="homeless_map">Map Click</Link>
+                <br/>
+                <Link to="person">Person Application</Link>
                 {this.props.children}
 			</div>
 		);
