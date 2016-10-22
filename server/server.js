@@ -18,6 +18,7 @@ app.use(`/`, express.static(path.join(__dirname, '../deploy')));
 app.get('/*', (req, res) => {
   res.sendFile((path.join(__dirname, '../deploy/index.html')), {title: 'GlobalHack VI' });
 });
+
 var server = app.listen(port, function() {
     logger.info('Started listening on port', port);
 });
@@ -34,7 +35,7 @@ app.all('/reply_to_sms/', function(request, response) {
         'src' : to_number,
         'dst' : from_number
     };
-    var body = "Thanks, we've received your message.";
+    var body = "Team MonCybers in the house :party_parrot:";
 
     var r = plivo.Response();
     r.addMessage(body, params);

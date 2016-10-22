@@ -551,68 +551,91 @@ const PersonApplicationComponent = React.createClass({
                 <form className='form-padding'>
                     <div className="row">
                         <div className="col-md-8">
-                            <h2>Application For Services</h2>
+                            <h2 className="application-header">Application For Services</h2>
                         </div>
-                        <div className="col-md-4">
-                            <input type="checkbox" checked={this.state.fullForm} value="fullForm" onChange={() => {this.setState({fullForm: !this.state.fullForm});}} /> Full Form
+                        <div className="col-md-12">
+                            <h5>Full Form &nbsp;&nbsp;<input type="checkbox" checked={this.state.fullForm} value="fullForm" onChange={() => {this.setState({fullForm: !this.state.fullForm});}} /> 
+                            </h5>
                         </div>
                     </div>
+                    <hr className="hr"/>
                     <div className="row">
                         <div className="col-md-12">
-                            <h4>Demographic Information</h4>
+                            <h4 className="form-header">Demographic Information</h4>
                         </div>
                     </div>
                     {this.renderDemographicInformation()}
+                                            <hr className="hr"/>
+
                     <div className='row'>
                         <div className="col-md-12">
-                            <h4>Contact Information</h4>
+                            <h4 className="form-header">Contact Information</h4>
                         </div>
                     </div>
                     {this.renderContactInformation()}
+                     <hr className="hr"/>
                     <div className="row">
                         <div className="col-md-12">
                             <h4>Veteran Status</h4>
                         </div>
                     </div>
                     {this.renderVeteranQuestions()}
+                     <hr className="hr"/>
+
                     <div className="row">
                         <div className="col-md-12">
-                            <h4>Housing</h4>
+                            <h4 className="form-header">Housing</h4>
                         </div>
                     </div>
                     {this.renderHousing()}
+                     <hr className="hr"/>
+
                     <div className="row">
                         <div className="col-md-12">
-                            <h4>Employment</h4>
+                            <h4 className="form-header">Employment</h4>
                         </div>
                     </div>
                     {this.renderEmployment()}
+                     <hr className="hr"/>
+
                     <div className="row">
                         <div className="col-md-12">
                             <h4>Education</h4>
                         </div>
                     </div>
                     {this.renderEducation()}
+                    <hr className="hr"/>
+
                     <div className="row">
                         <div className="col-md-12">
-                            <h4>Health</h4>
+                            <h4 className="form-header">Health</h4>
                         </div>
                     </div>
                     {this.renderHealth()}
+                                            <hr className="hr"/>
+
                     {this.renderDomesticViolence()}
+                                            <hr className="hr"/>
+
                     {this.renderPregnancy()}
+                                            <hr className="hr"/>
+
                     <div className="row">
                         <div className="col-md-12">
-                            <h4>Disability</h4>
+                            <h4 className="form-header">Disability</h4>
                         </div>
                     </div>
                     {this.renderDisability()}
+                                            <hr className="hr"/>
+
                     <div className="row">
                         <div className="col-md-12">
-                            <h4>Services Needed</h4>
+                            <h4 className="form-header">Services Needed</h4>
                         </div>
                     </div>
                     {this.renderServices()}
+                                            <hr className="hr"/>
+
                     <div className="row">
                         <div className="col-md-4">
                             <Button id="saveButton"
@@ -632,30 +655,36 @@ const PersonApplicationComponent = React.createClass({
                 <form className='form-padding'>
                     <div className="row">
                         <div className="col-md-8">
-                            <h2>Application For Services</h2>
+                            <h2 className="application-header">Application For Services</h2>
                         </div>
-                        <div className="col-md-4">
-                            <input type="checkbox" checked={this.state.fullForm} value="fullForm" onChange={() => {this.setState({fullForm: !this.state.fullForm});}} /> Full Form
+                        <div className="col-md-12">
+                            <h5>Full Form &nbsp;&nbsp;
+                            <input type="checkbox" checked={this.state.fullForm} value="fullForm" onChange={() => {this.setState({fullForm: !this.state.fullForm});}} /> 
+                            </h5>
                         </div>
                     </div>
+                    <hr className="hr"/>
                     <div className="row">
                         <div className="col-md-12">
-                            <h4>Demographic Information</h4>
+                            <h4 className="form-header">Demographic Information</h4>
                         </div>
                     </div>
                     {this.renderDemographicInformation()}
+                     <hr className="hr"/>
                     <div className='row'>
                         <div className="col-md-12">
-                            <h4>Contact Information</h4>
+                            <h4 className="form-header">Contact Information</h4>
                         </div>
                     </div>
                     {this.renderContactInformation()}
+                    <hr className="hr"/>
                     <div className="row">
                         <div className="col-md-12">
-                            <h4>Services Needed</h4>
+                            <h4 className="form-header">Services Needed</h4>
                         </div>
                     </div>
                     {this.renderServices()}
+                    <hr className="hr"/>
                     <div className="row">
                         <div className="col-md-4">
                             <Button id="saveButton"

@@ -1,14 +1,39 @@
 import React from 'react';
 import {Link} from 'react-router';
-import {Button }from 'react-bootstrap';
 
 export default class LandingPage extends React.Component{
 	render(){
 		return(
-			<div className="center">
-				<Button bsStyle="default" bsSize="large" block><Link to="provider">I'm a Service Provider</Link></Button>
-				<Button  bsStyle="primary" bsSize="large" block>I Need Assistance</Button>
-				<Button  bsStyle="default" bsSize="large" block>I Want to Help</Button>
+			<div className="cards">
+				<div className="card">
+					<div className="card-header">
+						<Link to="provider"><h3>I'm a Service Provider</h3></Link>
+					</div>
+					<img src = "./serviceProvider.png" />
+					<div className="card-block">
+						<p className="card-text" >Log in and view your service provider portal and manage your clients.</p>
+					</div>
+				</div>
+
+				<div className="card">
+					<div className="card-header">
+						<Link to="application"><h3>I Need Assistance</h3></Link>
+					</div>
+					<img src = "./INeedHelp.png" />
+					<div className="card-block">
+						<p className="card-text" >Find services that meet your needs.</p>
+					</div>
+				</div>
+
+				<div className="card"> 
+					<div className="card-header">
+						<h3>I Want to Help</h3>
+					</div>
+					<img src = "./volunteer-icon.png" />
+					<div className="card-block">
+						<p className="card-text" >Offer help to someone in need. You have more to offer than you think.</p>
+					</div>
+				</div>
 			</div>
 		);
 	}
