@@ -20,46 +20,54 @@ function searchForShelters(self, searchParams) {
 var MapSearchPage = React.createClass({
     getInitialState(){
         return {
-            searchGroup: 'Gender',
-            searchText: '',
+            gender: 'Unspecified',
+            veteran: 'Unspecified',
             shelters: []
         };
-    },
-    handleChange(e){
-        console.log(e.target.value);
-        this.setState({searchText: e.target.value});
-    },
-    handleDropDownSelection(e){
-        this.setState({searchGroup: e});
     },
     componentDidMount(){
         searchForShelters(this, {});
     },
     updateShelters(){
-        var reqBody = {};
-        reqBody[this.state.searchGroup] = this.state.searchText;
-        searchForShelters(this, reqBody);
+        searchForShelters(this, {gender: this.state.gender, veteran: this.state.veteran});
+    },
+    handleGenderSelect(e) {
+        this.setState({gender: e.target.value});
+    },
+    handleVeteranSelect(e) {
+        this.setState({veteran: e.target.value});
     },
     render(){
         return (
             <div>
                 <Form inline>
                     <FormGroup controlId="formBasicText">
-                        <ControlLabel>Filter Map Results</ControlLabel>
+                        <ControlLabel>Filter Map Results:</ControlLabel>
                     </FormGroup>
                     &nbsp;&nbsp;
-                    <FormGroup controlId="searchBox">
-                        <DropdownButton bsStyle='default' title={this.state.searchGroup}
-                                        onSelect={this.handleDropDownSelection} id="searchBoxDropDown">
-                            <MenuItem eventKey="Gender">Gender</MenuItem>
-                            <MenuItem eventKey="Veteran Status">Veteran Status</MenuItem>
-                        </DropdownButton>
+                    <FormGroup controlId="formControlsSelect">
+                        <ControlLabel>Gender</ControlLabel>
                         &nbsp;&nbsp;
-                        <FormControl type="text" value={this.state.searchText}
-                                     placeholder={`Enter ${this.state.searchGroup}`} onChange={this.handleChange}/>
-                        &nbsp;&nbsp;
-                        <Button bsStyle="primary" disabled={this.state.searchText === ''} onClick={this.updateShelters}>Filter</Button>
+                        <FormControl componentClass="select" placeholder="Select Gender"
+                                     onChange={this.handleGenderSelect}>
+                            <option value="Unspecified">...</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </FormControl>
                     </FormGroup>
+                    &nbsp;&nbsp;
+                    <FormGroup controlId="formControlsSelect">
+                        <ControlLabel>Is Veteran?</ControlLabel>
+                        &nbsp;&nbsp;
+                        <FormControl componentClass="select" placeholder="Veteran Status"
+                                     onChange={this.handleVeteranSelect}>
+                            <option value="Unspecified">...</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </FormControl>
+                    </FormGroup>
+                    &nbsp;&nbsp;
+                    <Button bsStyle="primary" onClick={this.updateShelters}>Filter</Button>
                 </Form>
                 <br/>
                 <HomelessMap shelters={this.state.shelters}/>
