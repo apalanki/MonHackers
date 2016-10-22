@@ -1,3 +1,6 @@
+dependencies:
+  override:
+    - echo "not installing dependencies on circle"%
 deployment:
   staging:
     branch: master
