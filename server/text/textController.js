@@ -10,7 +10,7 @@ var currentNumber = '';
 var answeredQuestions = [];
 
 function getNextQuestion() {
-    return questionsDataMap[Object.keys(questionsDataMap)[answeredQuestions.length + 1]];
+    return Object.keys(questionsDataMap)[answeredQuestions.length];
 }
 
 module.exports = {
@@ -18,21 +18,20 @@ module.exports = {
         if (answeredQuestions.length === 0 && currentNumber === '') {
             console.log('first message');
             currentNumber = number;
-            return 'Hi ' + number + ' Thanks for texting us.' + questionsDataMap["0"];
+            return 'Hi ' + number + '. Thanks for texting us.' + questionsDataMap["0"];
         } else if (currentNumber === number && answeredQuestions.length === 0) {
             console.log('second message');
             if (text === 'YES') {
                 answeredQuestions.push(text);
                 return getNextQuestion();
             } else {
-                console.log('second message no');
-                return 'Hi ' + number + ' Thanks for texting us.' + questionsDataMap["0"];
+                return 'Hi ' + number + '. Thanks for texting us.' + questionsDataMap["0"];
             }
-        } else if (currentNumber === number && answeredQuestions.length > 0 && answeredQuestions.length <= Object.keys(questionsDataMap).length - 1) {
+        } else if (currentNumber === number && answeredQuestions.length > 0 && answeredQuestions.length <= Object.keys(questionsDataMap).length) {
             console.log('subsequent messages, answered questions length: ', answeredQuestions.length);
             answeredQuestions.push(text);
             return getNextQuestion();
-        } else if (answeredQuestions.length > questionsDataMap.length - 1) {
+        } else if (answeredQuestions.length > questionsDataMap.length) {
             console.log('All questions answered', answeredQuestions);
             // Save answers to Database and send appropriate data for further registration
             return 'This completes partial registration. Please visit any of the shelters listed above to continue with registration';
