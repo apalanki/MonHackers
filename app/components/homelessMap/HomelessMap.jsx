@@ -25,6 +25,7 @@ let HomelessMap = React.createClass({
             return (<ShelterPin key={index} lat={shelter.latitude} lng={shelter.longitude}
                                 missing_requirements={shelter.missing_requirements} text={shelter.capacity}/>);
         });
+    },
     render() {
         return (
             <div className="map-wrapper">
