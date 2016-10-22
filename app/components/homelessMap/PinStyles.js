@@ -1,5 +1,5 @@
-const K_WIDTH = 30;
-const K_HEIGHT = 30;
+const K_WIDTH = 40;
+const K_HEIGHT = 28;
 
 const circleStyle = function (color) {
     return {
@@ -16,7 +16,7 @@ const circleStyle = function (color) {
         textAlign: 'center',
         fontSize: 10,
         fontWeight: 'bold',
-        padding: 4
+        padding: 2
     };
 };
 
