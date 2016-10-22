@@ -1,7 +1,7 @@
 {
-  "name": "gh6",
+  "name": "MonHackers",
   "version": "1.0.0",
-  "description": "Global Hack 6 skeleton application based on Nodejs, Expressjs and Reactjs",
+  "description": "Monsanto Hackers application based on Nodejs, Expressjs and Reactjs",
   "main": "gulpfile.js",
   "scripts": {
     "dev": "gulp watch",
