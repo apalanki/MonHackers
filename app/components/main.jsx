@@ -7,6 +7,7 @@ export default class Main extends React.Component{
 			<div>
 				<p className="lead"> Hello, Global Hackers! </p>
 				<Link to="goodbye">Click here. Life is made up of meetings and partings. That is the way of it. </Link>
+				<Link to="person">Person Application</Link>
 			</div>
 		);
 	}
