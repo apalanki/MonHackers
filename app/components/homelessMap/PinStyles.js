@@ -17,7 +17,7 @@ const circleStyle = function (color) {
         fontSize: 10,
         fontWeight: 'bold',
         padding: 4
-    }
+    };
 };
 
 module.exports = {

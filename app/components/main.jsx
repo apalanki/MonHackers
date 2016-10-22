@@ -4,7 +4,7 @@ var socket = io();
 
 let Main = React.createClass({
     getInitialState() {
-        return {socketMess: ''}
+        return {socketMess: ''};
     },
     componentDidMount() {
         socket.on('server event', function(data){

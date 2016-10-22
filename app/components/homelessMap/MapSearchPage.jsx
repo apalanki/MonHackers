@@ -23,7 +23,7 @@ var MapSearchPage = React.createClass({
             searchGroup: 'Gender',
             searchText: '',
             shelters: []
-        }
+        };
     },
     handleChange(e){
         this.setState({searchText: e.target.value});
