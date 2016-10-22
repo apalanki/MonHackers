@@ -13,6 +13,7 @@ const appBaseUrl = '/gh6';
 const app = express();
 app.use(log4js.connectLogger(logger, {level: log4js.levels.INFO}));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(`${appBaseUrl}/services`, require('./routes'));
 app.use(`${appBaseUrl}/`, express.static(path.join(__dirname, '../deploy')));
 app.listen(port, function() {

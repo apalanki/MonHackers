@@ -23,6 +23,7 @@
       "error",
       "unix"
     ],
+    "no-console": 1,
     "quotes": [
       "warn",
       "single"
