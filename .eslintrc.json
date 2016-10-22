@@ -4,7 +4,10 @@
     "es6": true,
     "node": true
   },
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
   "parserOptions": {
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true,
@@ -13,7 +16,8 @@
     "sourceType": "module"
   },
   "globals": {
-    "window": true
+    "window": true,
+    "io": true
   },
   "plugins": [
     "react"
@@ -23,6 +27,8 @@
       "error",
       "unix"
     ],
+    "no-console": 0,
+    "react/prop-types": 0,
     "quotes": [
       "warn",
       "single"

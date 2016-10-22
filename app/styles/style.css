@@ -5,3 +5,8 @@
 	display:block !important;
 	margin:15px;
 }
+.map-wrapper{
+    height: 600px;
+    width: 100%;
+
+}
