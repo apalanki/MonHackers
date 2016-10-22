@@ -48,6 +48,8 @@
     "react-pure-render": "^1.0.2",
     "react-router": "^2.8.1",
     "reactify": "^1.1.1",
+    "socket.io": "^1.5.0",
+    "socket.io-client": "^1.5.0",
     "superagent": "^2.3.0",
     "underscore": "^1.8.3",
     "vinyl-source-stream": "^1.1.0"
