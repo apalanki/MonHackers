@@ -19,7 +19,7 @@ let Main = React.createClass({
                 <br/>
                 <Link to="homeless_map">Map Click</Link>
                 <br/>
-                <Link to="person">Person Application</Link>
+                <Link to="application">Person Application</Link>
                 {this.props.children}
             </div>
         );
