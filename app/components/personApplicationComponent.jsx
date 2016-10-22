@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, FormGroup, ControlLabel, FormControl, CheckBox} from 'react-bootstrap';
 var DatePicker = require('react-bootstrap-date-picker');
-
+const request = require('superagent');
 
 const PersonApplicationComponent = React.createClass({
     getInitialState() {
@@ -35,12 +35,11 @@ const PersonApplicationComponent = React.createClass({
         const application = this.state.application;
 
         if(application.services.includes(value)) {
-            application.services.splice(application.services.indexOf(val), 1);
+            application.services.splice(application.services.indexOf(value), 1);
         } else {
             application.services.push(value);
         }
         this.setState({application: application});
-        console.log(this.state.application);
     },
     renderDemographicInformation() {
         return (
@@ -637,39 +636,50 @@ const PersonApplicationComponent = React.createClass({
         return (
             <div>
                 <div className='row'>
-                    <div className='col-md-2'>
+                    <div className='col-md-3'>
                         <input type="checkbox" checked={this.state.application.services.includes('emergencyShelter')} value="emergencyShelter" onChange={(event) => {this.handleServices(event.target.value);}} /> Emergency Shelter
                     </div>
-                    <div className='col-md-2'>
+                    <div className='col-md-3'>
                         <input type="checkbox" checked={this.state.application.services.includes('food')} value="food" onChange={(event) => {this.handleServices(event.target.value);}} /> Food
                     </div>
                 </div>
                 <div className='row'>
-                    <div className='col-md-2'>
+                    <div className='col-md-3'>
                         <input type="checkbox" checked={this.state.application.services.includes('clothing')} value="clothing" onChange={(event) => {this.handleServices(event.target.value);}} /> Clothing
                     </div>
-                    <div className='col-md-2'>
+                    <div className='col-md-3'>
                         <input type="checkbox" checked={this.state.application.services.includes('hygine')} value="hygine" onChange={(event) => {this.handleServices(event.target.value);}} /> Hygine Supplies and Services
                     </div>
                 </div>
                 <div className='row'>
-                    <div className='col-md-2'>
+                    <div className='col-md-3'>
                         <input type="checkbox" checked={this.state.application.services.includes('job')} value="job" onChange={(event) => {this.handleServices(event.target.value);}} /> Job Coaching/Searching
                     </div>
-                    <div className='col-md-2'>
+                    <div className='col-md-3'>
                         <input type="checkbox" checked={this.state.application.services.includes('bills')} value="bills" onChange={(event) => {this.handleServices(event.target.value);}} /> Emergency Bill Aid
                     </div>
                 </div>
                 <div className='row'>
-                    <div className='col-md-2'>
+                    <div className='col-md-3'>
                         <input type="checkbox" checked={this.state.application.services.includes('addiction')} value="addiction" onChange={(event) => {this.handleServices(event.target.value);}} /> Help with Addiction
                     </div>
-                    <div className='col-md-2'>
+                    <div className='col-md-3'>
                         <input type="checkbox" checked={this.state.application.services.includes('mental')} value="mental" onChange={(event) => {this.handleServices(event.target.value);}} /> Mental Health Help
                     </div>
                 </div>
             </div>
         );
+    },
+    saveApplication() {
+        request.post('/gh6/services/applicant')
+            .send(this.state.application)
+            .end((err, res) => {
+                if (err) {
+                    console.log('error : ', err);
+                } else {
+                    console.log('saved successfully!');
+                }
+            });
     },
     render() {
         return (
@@ -736,6 +746,15 @@ const PersonApplicationComponent = React.createClass({
                         </div>
                     </div>
                     {this.renderServices()}
+                    <div className="row">
+                        <div className="col-md-4">
+                            <Button id="saveButton"
+                                    bsStyle='primary'
+                                    onClick={this.saveApplication}>
+                                Save
+                            </Button>
+                        </div>
+                    </div>
                 </form>
             </div>
         );
