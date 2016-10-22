@@ -17,33 +17,7 @@ const getAll = (collectionName, callback) => {
             });
         }
     });
-}
-
-function getAllPeople(callback) {
-    console.log("getting all people");
-    MongoClient.connect(url, function (err, db) {
-        if (err) {
-            callback(err);
-        }
-        else {
-            find(db, 'people', {}, (err, result) => {
-                handle(err, result, callback);
-            });
-        }
-        db.close();
-    });
-}
-function getAllApplicants(callback) {
-    MongoClient.connect(url, function (err, db) {
-        if (err) callback(err);
-        else {
-            find(db, 'applicants', {}, (err, result) => {
-                handle(err, result, callback);
-            });
-        }
-        db.close();
-    });
-}
+};
 
 function getAllPeople(callback) {
     console.log("getting all people");
