@@ -27,11 +27,11 @@ module.exports = {
             } else {
                 return 'Hi ' + number + '. Thanks for texting us.' + questionsDataMap["0"];
             }
-        } else if (currentNumber === number && answeredQuestions.length > 0 && answeredQuestions.length < Object.keys(questionsDataMap).length) {
+        } else if (currentNumber === number && answeredQuestions.length > 0 && answeredQuestions.length < Object.keys(questionsDataMap).length - 1) {
             console.log('subsequent messages, answered questions length: ', answeredQuestions.length);
             answeredQuestions.push(text);
             return getNextQuestion();
-        } else if (answeredQuestions.length > questionsDataMap.length) {
+        } else if (answeredQuestions.length === questionsDataMap.length - 1) {
             answeredQuestions.push(text);
             console.log('All questions answered', answeredQuestions);
             // Save answers to Database and send appropriate data for further registration
