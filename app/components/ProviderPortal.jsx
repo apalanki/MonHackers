@@ -1,6 +1,5 @@
 import React from 'react';
-import {Form, FormControl, FormGroup, Checkbox, Button, Col, ControlLabel }from 'react-bootstrap';
-import LoginModal from './LoginModal.jsx';
+let LoginModal = require('./LoginModal');
 
 const ProviderPortal = React.createClass({
     getInitialState(){
