@@ -3,7 +3,7 @@ let styles = require('./PinStyles');
 
 var ShelterPin = React.createClass({
     getPinColor(){
-        return this.props.missing_requirements.length === 0 ? 'green' : 'red';
+        return this.props.missing_requirements && this.props.missing_requirements.length === 0 ? 'green' : 'red';
     },
     render() {
         return (

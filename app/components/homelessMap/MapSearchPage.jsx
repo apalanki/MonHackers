@@ -4,8 +4,8 @@ import {Form, FormGroup, FormControl, ControlLabel, DropdownButton, MenuItem, Bu
 const request = require('superagent');
 
 function searchForShelters(self, searchParams) {
-    request.post('/gh6/services/search')
-        .send(searchParams)
+    request.get('/gh6/services/search')
+        .query(searchParams)
         .end((err, res)=> {
             if (err) {
                 console.log('error getting data', err);
@@ -26,6 +26,7 @@ var MapSearchPage = React.createClass({
         };
     },
     handleChange(e){
+        console.log(e.target.value);
         this.setState({searchText: e.target.value});
     },
     handleDropDownSelection(e){

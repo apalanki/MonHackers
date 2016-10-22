@@ -1,16 +1,13 @@
 const find = require('./util/find');
 const MongoClient = require('mongodb').MongoClient;
-
 // Connection URL
 const url = 'mongodb://monhackers:monhackers@ds023603.mlab.com:23603/globalhack6';
 
 function getAllApplicants(callback) {
     MongoClient.connect(url, function (err, db) {
-        if (err) {
-            callback(err);
-        }
+        if (err) callback(err);
         else {
-            find(db, 'applicants', (err, result) => {
+            find(db, 'applicants', {}, (err, result) => {
                 callback(null, result);
             });
         }
@@ -30,11 +27,14 @@ function insertApplicant(applicant, callback) {
     });
 }
 
-function getShelterDetails(callback) {
+function getShelterDetails(callback, requestQuery) {
+    var query = {};
+    if (requestQuery['Gender']) requestQuery.gender === 'female' ? query['$or'] = [{'single_women_18+': 'yes'}, {"pregnant_women_only": "yes"}] : query['single_men_18+'] = 'yes';
+    if (requestQuery['Veteran Status']) query['veteran_support'] = requestQuery.veteran;
     MongoClient.connect(url, function (err, db) {
         if (err) callback(err);
         else {
-            find(db, 'shelters', (err, result) => {
+            find(db, 'shelters', query, (err, result) => {
                 callback(null, result);
             });
         }
