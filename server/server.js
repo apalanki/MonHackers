@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const log4js = require('log4js');
 const logger = log4js.getLogger();
+const textController = require('./text/textController');
 
 const bodyParser = require('body-parser');
 var plivo = require('plivo');
@@ -35,7 +36,8 @@ app.all('/reply_to_sms/', function(request, response) {
         'src' : to_number,
         'dst' : from_number
     };
-    var body = "Team MonCybers in the house :party_parrot:";
+
+    var body = textController.maintainConversation(from_number, text);
 
     var r = plivo.Response();
     r.addMessage(body, params);
