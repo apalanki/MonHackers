@@ -27,11 +27,12 @@ module.exports = {
             } else {
                 return 'Hi ' + number + '. Thanks for texting us.' + questionsDataMap["0"];
             }
-        } else if (currentNumber === number && answeredQuestions.length > 0 && answeredQuestions.length <= Object.keys(questionsDataMap).length) {
+        } else if (currentNumber === number && answeredQuestions.length > 0 && answeredQuestions.length < Object.keys(questionsDataMap).length) {
             console.log('subsequent messages, answered questions length: ', answeredQuestions.length);
             answeredQuestions.push(text);
             return getNextQuestion();
         } else if (answeredQuestions.length > questionsDataMap.length) {
+            answeredQuestions.push(text);
             console.log('All questions answered', answeredQuestions);
             // Save answers to Database and send appropriate data for further registration
             return 'This completes partial registration. Please visit any of the shelters listed above to continue with registration';
