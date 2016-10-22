@@ -1,14 +1,15 @@
 import React from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
+import {Link} from 'react-router';
+import {Button }from 'react-bootstrap';
 
 export default class LandingPage extends React.Component{
 	render(){
 		return(
 			<div className="center">
-				<RaisedButton label="I'm a Service Provider" className="landing-button"/>
-				<RaisedButton label="I Need Assistance" className="landing-button"/>
-				<RaisedButton label = "I Want to Help" className="landing-button"/>
+				<Button bsStyle="default" bsSize="large" block><Link to="provider">I'm a Service Provider</Link></Button>
+				<Button  bsStyle="primary" bsSize="large" block>I Need Assistance</Button>
+				<Button  bsStyle="default" bsSize="large" block>I Want to Help</Button>
 			</div>
-		)
+		);
 	}
 }

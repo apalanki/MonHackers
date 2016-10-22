@@ -14,7 +14,10 @@ const app = express();
 app.use(log4js.connectLogger(logger, {level: log4js.levels.INFO}));
 app.use(bodyParser.json());
 app.use(`${appBaseUrl}/services`, require('./routes'));
-app.use(`${appBaseUrl}/`, express.static(path.join(__dirname, '../deploy')));
+app.use(`/`, express.static(path.join(__dirname, '../deploy')));
+app.get('/*', (req, res) => {
+  res.sendFile((path.join(__dirname, '../deploy/index.html')), {title: 'GlobalHack VI' });
+});
 app.listen(port, function() {
     logger.info('Started listening on port', port);
 });

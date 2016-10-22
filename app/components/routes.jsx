@@ -1,10 +1,12 @@
-import {Router, Route, browserHistory} from 'react-router';
+import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import LandingPage from './main.jsx';
+import LandingPage from './LandingPage.jsx';
+import ProviderPortal from './ProviderPortal.jsx';
 
-const routes = <Route>		
-					<Route path = "/gh6" component={LandingPage} />
+const routes = <Route path = "/" >		
+					<IndexRoute component={LandingPage}/>
+					<Route name="provider" path = "/provider" component={ProviderPortal}/>
 				</Route>;
 
 window.onload = () => {
