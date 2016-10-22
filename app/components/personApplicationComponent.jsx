@@ -673,7 +673,7 @@ const PersonApplicationComponent = React.createClass({
     saveApplication() {
         request.post('/gh6/services/applicant')
             .send(this.state.application)
-            .end((err, res) => {
+            .end((err) => {
                 if (err) {
                     console.log('error : ', err);
                 } else {
