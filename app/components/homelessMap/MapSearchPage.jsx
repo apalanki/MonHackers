@@ -1,6 +1,8 @@
 import React from 'react';
 let HomelessMap = require('./HomelessMap.jsx');
 import {Form, FormGroup, FormControl, ControlLabel, DropdownButton, MenuItem, Button} from 'react-bootstrap';
+import {Link} from 'react-router';
+
 const request = require('superagent');
 
 function searchForShelters(self, searchParams) {
@@ -40,7 +42,7 @@ var MapSearchPage = React.createClass({
     render(){
         return (
             <div>
-                <Form inline>
+                <Form inline className="col-md-8">
                     <FormGroup controlId="formBasicText">
                         <ControlLabel>Filter Map Results:</ControlLabel>
                     </FormGroup>
@@ -69,7 +71,8 @@ var MapSearchPage = React.createClass({
                     &nbsp;&nbsp;
                     <Button bsStyle="primary" onClick={this.updateShelters}>Filter</Button>
                 </Form>
-                <br/>
+                <h4 className="col-md-4" style={{textAlign:"right"}} ><Link to="application">Apply here</Link> for services.</h4>
+                <br/><br/>
                 <HomelessMap shelters={this.state.shelters}/>
             </div>
         );

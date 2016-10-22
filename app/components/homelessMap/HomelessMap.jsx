@@ -1,6 +1,5 @@
 import React from 'react';
 import shouldPureComponentUpdate from 'react-pure-render/function';
-
 import GoogleMap from 'google-map-react';
 let ShelterPin = require('./ShelterPin.jsx');
 const MapsApiKey = 'AIzaSyC2XTd6n4hEiSPId4WRss-yZ8gzf2TDr9U';

@@ -68,6 +68,7 @@
 
 .pc-navbar {
 	background-color: lightblue;
+	opacity: .9;
 	margin: 0;
 }
 
@@ -95,6 +96,8 @@
 
 .nav-bar-background {
 	height: 80px;
+	-webkit-box-shadow: 0, 1px, 5px, 5px, blue;
+	box-shadow: 0, 1px, 5px, 5px, blue;
 }
 
 .stl-skyline {
