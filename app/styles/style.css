@@ -65,3 +65,49 @@
   right: 0;
   top: 0;
 }
+
+.pc-navbar {
+	background-color: lightblue;
+	margin: 0;
+}
+
+.form-container {
+	background-color: white;
+	opacity: .9;
+}
+
+.form-padding {
+	padding: 15px;
+}
+
+
+.nav-title {
+	color: #337ab7!important;
+	font-size: 50px;
+	padding-top: 25px;
+}
+
+.service-link {
+	padding-top: 30px;
+}
+
+.nav-bar-background {
+	height: 80px;
+}
+
+.stl-skyline {
+	width:100vw;
+	height:100vh;
+	background-image: url('./stlSkyline.jpg');
+	background-size:cover;
+}
+
+.top-padding {
+	padding-top: 10px;
+}
+
+.service-divider {
+	font-size: 40px;
+	font-weight: lighter;
+	color:blue;
+}

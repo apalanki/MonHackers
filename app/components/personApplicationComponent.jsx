@@ -547,8 +547,8 @@ const PersonApplicationComponent = React.createClass({
     },
     renderFullForm() {
         return (
-            <div>
-                <form>
+            <div className='form-container'>
+                <form className='form-padding'>
                     <div className="row">
                         <div className="col-md-8">
                             <h2>Application For Services</h2>
@@ -628,8 +628,8 @@ const PersonApplicationComponent = React.createClass({
     },
     renderShortForm() {
         return (
-            <div>
-                <form>
+            <div className='form-container'>
+                <form className='form-padding'>
                     <div className="row">
                         <div className="col-md-8">
                             <h2>Application For Services</h2>

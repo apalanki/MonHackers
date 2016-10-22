@@ -7,11 +7,11 @@ import ProviderPortal from './ProviderPortal.jsx';
 let MapSearchPage = require('./homelessMap/MapSearchPage.jsx');
 import PersonApplicationComponent from './personApplicationComponent.jsx';
 
-const routes = <Route path = "/" >		
+const routes = <Route path = "/" >
 					<IndexRoute component={LandingPage}/>
 					<Route name="provider" path = "/provider" component={ProviderPortal}/>
 					<Route name="homeless_map" path="/homeless_map" component={MapSearchPage}/>
-					<Route name="person" path="/person" component= {PersonApplicationComponent} />
+					<Route name="application" path="/application" component= {PersonApplicationComponent} />
 				</Route>;
 
 window.onload = () => {
