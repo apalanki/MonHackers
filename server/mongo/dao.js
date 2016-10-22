@@ -48,7 +48,7 @@ function isDefined(data) {
 function getShelterDetails(requestQuery, callback) {
     var query = {};
     if (isDefined(requestQuery['gender'])) {
-        requestQuery.gender === 'female'
+        requestQuery.gender.toLowerCase() === 'female'
             ? query['$or'] = [{'single_women_18+': 'yes'}, {'pregnant_women_only': 'yes'}]
             : query['single_men_18+'] = 'yes';
     }
