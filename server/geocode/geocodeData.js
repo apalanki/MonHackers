@@ -27,6 +27,7 @@ function addLatLongsToShelters(shelters, callback) {
         });
     });
 }
+
 module.exports = {
     addLatLongToSheltersArray: addLatLongsToShelters
 };

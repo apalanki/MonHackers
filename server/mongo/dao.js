@@ -3,9 +3,9 @@ const MongoClient = require('mongodb').MongoClient;
 // Connection URL
 const url = 'mongodb://monhackers:monhackers@ds023603.mlab.com:23603/globalhack6';
 const handle = (err, result, callback) => {
-    if(err) callback(err, null);
+    if (err) callback(err, null);
     else callback(null, result);
-}
+};
 
 const getAll = (collectionName, callback) => {
     MongoClient.connect(url, function (err, db) {
@@ -17,7 +17,7 @@ const getAll = (collectionName, callback) => {
             });
         }
     });
-}
+};
 
 function getAllPeople(callback) {
     console.log("getting all people");
@@ -42,25 +42,23 @@ function insertApplicant(applicant, callback) {
 }
 
 function isDefined(data) {
-    return data !== 'Unspecified';
+    return (data != null && data !== 'Unspecified');
 }
 
-function getShelterDetails(callback, requestQuery) {
+function shelterSearch(requestQuery, callback) {
     var query = {};
-    console.log(requestQuery);
     if (isDefined(requestQuery['gender'])) {
-        requestQuery.gender === 'female'
+        requestQuery.gender === 'Female'
             ? query['$or'] = [{'single_women_18+': 'yes'}, {'pregnant_women_only': 'yes'}]
             : query['single_men_18+'] = 'yes';
     }
-    if (isDefined(requestQuery['veteran'])) query['veteran_support'] = requestQuery.veteran;
+    if (isDefined(requestQuery['veteran'])){
+        query['veteran_support'] = requestQuery.veteran;
+    } 
+    console.log("request query is", requestQuery);
     MongoClient.connect(url, function (err, db) {
         if (err) callback(err);
-        else {
-            find(db, 'shelters', query, (err, result) => {
-                handle(err,result,callback);
-            });
-        }
+        else find(db, 'shelters', query, (err, result) => handle(err, result, callback));
         db.close();
     });
 }
@@ -68,6 +66,6 @@ function getShelterDetails(callback, requestQuery) {
 module.exports = {
     getAllApplicants: getAllApplicants,
     insertApplicant: insertApplicant,
-    getShelterDetails: getShelterDetails,
+    shelterSearch: shelterSearch,
     getAllPeople: getAllPeople
 };
