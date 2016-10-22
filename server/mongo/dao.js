@@ -42,7 +42,7 @@ function insertApplicant(applicant, callback) {
 }
 
 function isDefined(data) {
-    return data !== 'Unspecified';
+    return (data != null && data !== 'Unspecified');
 }
 
 function shelterSearch(requestQuery, callback) {
@@ -52,7 +52,10 @@ function shelterSearch(requestQuery, callback) {
             ? query['$or'] = [{'single_women_18+': 'yes'}, {'pregnant_women_only': 'yes'}]
             : query['single_men_18+'] = 'yes';
     }
-    if (isDefined(requestQuery['veteran'])) query['veteran_support'] = requestQuery.veteran;
+    if (isDefined(requestQuery['veteran'])){
+        query['veteran_support'] = requestQuery.veteran;
+    } 
+    console.log("request query is", requestQuery);
     MongoClient.connect(url, function (err, db) {
         if (err) callback(err);
         else find(db, 'shelters', query, (err, result) => handle(err, result, callback));
