@@ -9,7 +9,7 @@ export default class LandingPage extends React.Component{
 					<div className="card-header">
 						<Link to="provider"><h3>I'm a Service Provider</h3></Link>
 					</div>
-					<img src = "./serviceProvider.png" />
+					<img src = "./provider_icon.png" />
 					<div className="card-block">
 						<p className="card-text" >Log in and view your service provider portal and manage your clients.</p>
 					</div>
@@ -25,7 +25,7 @@ export default class LandingPage extends React.Component{
 					</div>
 				</div>
 
-				<div className="card"> 
+				<div className="card">
 					<div className="card-header">
 						<h3>I Want to Help</h3>
 					</div>
