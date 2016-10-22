@@ -6,6 +6,7 @@ var questionsDataMap = {
     'Is this the best number to reach you?': 'phoneNumber'
 };
 
+var dao = require('../mongo/dao');
 var currentNumber = '';
 var answeredQuestions = [];
 
@@ -21,7 +22,7 @@ module.exports = {
             return 'Hi ' + number + '. Thanks for texting us.' + questionsDataMap["0"];
         } else if (currentNumber === number && answeredQuestions.length === 0) {
             console.log('second message');
-            if (text === 'YES') {
+            if (text === 'YES' || text === 'yes') {
                 answeredQuestions.push(text);
                 return getNextQuestion();
             } else {
@@ -41,7 +42,7 @@ module.exports = {
             console.log('Start over a new session', answeredQuestions.length);
             currentNumber = number;
             answeredQuestions = [];
-            return 'Hi ' + number + ' Thanks for texting us.' + questionsDataMap["0"];
+            return 'Hi ' + number + '. Thanks for texting us.' + questionsDataMap["0"];
         }
     }
 };

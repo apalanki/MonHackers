@@ -55,7 +55,6 @@ function shelterSearch(requestQuery, callback) {
     if (isDefined(requestQuery['veteran'])) {
         query['veteran_support'] = requestQuery.veteran;
     }
-    console.log("request query is", requestQuery);
     MongoClient.connect(url, function (err, db) {
         if (err) callback(err);
         else find(db, 'shelters', query, (err, result) => handle(err, result, callback));
