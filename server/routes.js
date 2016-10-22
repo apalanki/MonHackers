@@ -4,7 +4,6 @@ const express = require('express');
 const router = express.Router();
 const dao = require('./mongo/dao');
 const geoCodeData = require('./geocode/geocodeData');
-const logger = require('log4js').getLogger();
 
 function returnFailure(res, err) {
     return res.status(400).send({'error': err});

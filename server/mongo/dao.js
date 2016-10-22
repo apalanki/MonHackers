@@ -29,7 +29,7 @@ function insertApplicant(applicant, callback) {
 
 function getShelterDetails(callback, requestQuery) {
     var query = {};
-    if (requestQuery['Gender']) requestQuery.gender === 'female' ? query['$or'] = [{'single_women_18+': 'yes'}, {"pregnant_women_only": "yes"}] : query['single_men_18+'] = 'yes';
+    if (requestQuery['Gender']) requestQuery.gender === 'female' ? query['$or'] = [{'single_women_18+': 'yes'}, {'pregnant_women_only': 'yes'}] : query['single_men_18+'] = 'yes';
     if (requestQuery['Veteran Status']) query['veteran_support'] = requestQuery.veteran;
     MongoClient.connect(url, function (err, db) {
         if (err) callback(err);
