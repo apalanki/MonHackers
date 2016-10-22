@@ -23,7 +23,7 @@ let HomelessMap = React.createClass({
     getMarkers(){
         return this.props.shelters.map(function (shelter, index) {
             return (<ShelterPin key={index} lat={shelter.latitude} lng={shelter.longitude}
-                                missing_requirements={shelter.missing_requirements} text={shelter.name}/>);
+                                missing_requirements={shelter.missing_requirements} text={shelter.capacity}/>);
         });
     },
     render() {
