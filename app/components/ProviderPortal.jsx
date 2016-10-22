@@ -14,87 +14,42 @@ const ProviderPortal = React.createClass({
     render(){
         if(!this.state.isLoggedIn){
             return(
-                <div className="form-container" >
-                    <form>
-                        <FormGroup controlId="formHorizontalEmail">
-                          <Col componentClass={ControlLabel} sm={2}>
-                            Email
-                          </Col>
-                          <Col sm={10}>
-                            <FormControl type="email" placeholder="Email" value={this.state.email}/>
-                          </Col>
-                        </FormGroup>
-
-                        <FormGroup controlId="formHorizontalPassword">
-                          <Col componentClass={ControlLabel} sm={2}>
-                            Password
-                          </Col>
-                          <Col sm={10}>
-                            <FormControl type="password" placeholder="Password" />
-                          </Col>
-                          <div className="row pull-right">
-                              <Button id="login" bsStyle='primary' onClick={this.setLoggedIn}>
-                                  Login
-                              </Button>
-                          </div>
-                        </FormGroup>
+                <div className="form-container">
+                    <form className='form-padding'>
+                        <div className='row'>
+                            <div className='col-md-6 col-md-offset-3'>
+                                <h3>Log in to your account:</h3>
+                            </div>
+                        </div>
+                        <div className='row'>
+                            <div className='col-md-3 col-md-offset-3'>
+                                <FormGroup controlId='email'>
+                                    <ControlLabel>Email</ControlLabel>
+                                    <FormControl type='email' placeholder="Email"/>
+                                </FormGroup>
+                            </div>
+                            <div className='col-md-3'>
+                                <FormGroup controlId='password'>
+                                    <ControlLabel>Password</ControlLabel>
+                                    <FormControl type='password' placeholder="Password" />
+                                </FormGroup>
+                            </div>
+                        </div>
+                        <div className='row'>
+                            <div className='col-md-3 col-md-offset-8'>
+                                <Button id='login' bsStyle='primary'
+                                    onClick={this.setLoggedIn}>
+                                    Login
+                                </Button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             );
         }
         else{
         return(
-            <Form>
-            <FormGroup controlId="formHorizontalLocation">
-              <Col componentClass={ControlLabel} sm={2}>
-                Address
-              </Col>
-              <Col sm={10}>
-                <FormControl type="text" placeholder="Address" />
-              </Col>
-              <Col componentClass={ControlLabel} sm={2}>
-                Zip Code
-              </Col>
-              <Col sm={10}>
-                <FormControl type="text" placeholder="Zip Code" />
-              </Col>
-            </FormGroup>
-            <FormGroup>
-            <ControlLabel> Services Offered </ControlLabel>
-              <Checkbox inline>
-                Housing and Utility Assistance
-              </Checkbox>
-              <Checkbox inline>
-                Emergency Shelter
-              </Checkbox>
-              <Checkbox inline>
-                Medical
-              </Checkbox>
-              <Checkbox inline>
-                 Mental Health Services
-              </Checkbox>
-            </FormGroup>
-            <FormGroup controlId="formHorizontalGroupsServed">
-              <ControlLabel> Groups Served </ControlLabel>
-              <Checkbox inline>
-                Men Only
-              </Checkbox>
-              <Checkbox inline>
-                Women only
-              </Checkbox>
-              <Checkbox>
-                Age Range
-              </Checkbox>
-            </FormGroup>
-
-            <FormGroup>
-              <Col smOffset={2} sm={10}>
-                <Button type="submit">
-                    Register
-                </Button>
-              </Col>
-            </FormGroup>
-          </Form>
+            <div></div>
             );
         }
     }
