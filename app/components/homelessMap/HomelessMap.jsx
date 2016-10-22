@@ -12,13 +12,6 @@ let HomelessMap = React.createClass({
         greatPlaceCoords: React.PropTypes.any,
         shelters: React.PropTypes.array
     },
-    getDefaultProps() {
-        return {
-            center: [59.938043, 30.337157],
-            zoom: 9,
-            greatPlaceCoords: {lat: 59.724465, lng: 30.080121}
-        };
-    },
     shouldComponentUpdate: shouldPureComponentUpdate,
     getMarkers(){
         return this.props.shelters.map(function (shelter, index) {

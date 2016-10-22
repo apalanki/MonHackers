@@ -10,9 +10,9 @@ const handle = (err, result, callback) => {
 const getAll = (collectionName, callback) => {
     MongoClient.connect(url, function (err, db) {
         if (err) callback(err);
-        else{
+        else {
             db.collection(collectionName).find().toArray((err, result) => {
-                handle(err,result,callback);
+                handle(err, result, callback);
                 db.close();
             });
         }
@@ -52,9 +52,9 @@ function shelterSearch(requestQuery, callback) {
             ? query['$or'] = [{'single_women_18+': 'yes'}, {'pregnant_women_only': 'yes'}]
             : query['single_men_18+'] = 'yes';
     }
-    if (isDefined(requestQuery['veteran'])){
+    if (isDefined(requestQuery['veteran'])) {
         query['veteran_support'] = requestQuery.veteran;
-    } 
+    }
     console.log("request query is", requestQuery);
     MongoClient.connect(url, function (err, db) {
         if (err) callback(err);
@@ -63,9 +63,4 @@ function shelterSearch(requestQuery, callback) {
     });
 }
 
-module.exports = {
-    getAllApplicants: getAllApplicants,
-    insertApplicant: insertApplicant,
-    shelterSearch: shelterSearch,
-    getAllPeople: getAllPeople
-};
+module.exports = {getAllApplicants, insertApplicant, shelterSearch, getAllPeople};
