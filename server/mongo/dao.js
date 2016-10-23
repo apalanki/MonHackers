@@ -1,3 +1,4 @@
+'use strict';
 const find = require('./util/find');
 const MongoClient = require('mongodb').MongoClient;
 // Connection URL

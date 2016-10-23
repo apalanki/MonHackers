@@ -3,6 +3,7 @@ import {Button} from 'react-bootstrap';
 import ClientCardComponent from '../client/ClientCardComponent.jsx';
 import ClientCheckoutModal from '../client/ClientCheckoutModal.jsx';
 import ClientReferalModal from '../client/ClientReferalModal.jsx';
+import ClientCheckinModal from '../client/ClientCheckinModal.jsx';
 import _ from 'lodash';
 
 const ProviderClientsComponent = React.createClass({
@@ -59,6 +60,13 @@ const ProviderClientsComponent = React.createClass({
             this.setState({selectedClient: client});
         }
     },
+    renderClientCheckin() {
+        return (
+            <ClientCheckinModal show={this.state.showCheckinModal}
+                close={this.closeModal}
+                checkIn={this.checkIn} />
+        );
+    },
     renderClientCheckout() {
         return (
             <ClientCheckoutModal show={this.state.showCheckoutModal}
@@ -91,6 +99,7 @@ const ProviderClientsComponent = React.createClass({
             <div>
                 {this.renderClientCheckout()}
                 {this.renderClientReferal()}
+                {this.renderClientCheckin()}
                 <div className='row top-padding'>
                     <div className='col-md-4'>
                         <h3 className='underline'>Clients</h3>
@@ -98,7 +107,7 @@ const ProviderClientsComponent = React.createClass({
                     <div className='col-md-1 col-md-offset-4 top-padding'>
                         <Button id='checkIn'
                             bsStyle='primary'
-                            onClick={this.checkIn}>
+                            onClick={() => {this.openModal('showCheckinModal');}}>
                             Check In
                         </Button>
                     </div>
