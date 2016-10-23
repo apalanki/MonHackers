@@ -39,6 +39,7 @@ app.all('/reply_to_sms/', function(request, response) {
 
     var body = textController.maintainConversation(from_number, text);
 
+    console.log(body);
     var r = plivo.Response();
     r.addMessage(body, params);
     console.log (r.toXML());
