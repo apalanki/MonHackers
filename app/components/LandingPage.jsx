@@ -23,56 +23,58 @@ const providerText = `Manager your services through your provider portal.
 						Allocate resources and help clients find the help they need.`;
 
 const LandingPage = React.createClass({
-	renderSummary() {
-		return (
-			<div className='summary-container'>
-				<div className='row'>
-					<div className='col-md-12'>
-						<h1>Who Are We</h1>
-					</div>
-				</div>
-				<div className='row'>
-					<div className='col-md-12'>
-						<p>{aboutText}</p>
-					</div>
-				</div>
-			</div>
-		);
-	},
-	renderCard(path, title, img, text) {
-		return (
-			<div className='card card-hover'>
-				<div className='card-header'>
-					<Link to={path}><h3>{title}</h3></Link>
-				</div>
-				<img src={img}/>
-				<div className='card-block'>
-					<p className='card-text'>{text}</p>
-				</div>
-			</div>
-		);
-	},
-	renderPersonaCards() {
-		return (
-			<div className='row'>
-				<div className='col-md-12'>
-					<div className="cards cards-info">
-						{this.renderCard('homeless_map', 'I Need Help', './INeedHelp.png', helpText)}
-						{this.renderCard('volunteers', 'I Want to Help', './volunteer-icon.png', volunteerText)}
-						{this.renderCard('provider', 'I\'m a service provider', './provider_icon.png', providerText)}
-					</div>
-				</div>
-			</div>
-		);
-	},
-	render(){
-		return(
-			<div>
-				{this.renderSummary()}
-				{this.renderPersonaCards()}
-			</div>
-		);
-	}
+    renderSummary() {
+        return (
+            <div className='summary-container'>
+                <div className='row'>
+                    <div className='col-md-12'>
+                        <h1>Who Are We</h1>
+                    </div>
+                </div>
+                <div className='row'>
+                    <div className='col-md-12'>
+                        <p>{aboutText}</p>
+                    </div>
+                </div>
+            </div>
+        );
+    },
+    renderCard(path, title, img, text) {
+        return (
+            <div className='card card-hover'>
+                <Link to={path}>
+                    <div className='card-header'>
+                        <h3>{title}</h3>
+                    </div>
+                    <img src={img}/>
+                    <div className='card-block'>
+                        <p className='card-text'>{text}</p>
+                    </div>
+                </Link>
+            </div>
+        );
+    },
+    renderPersonaCards() {
+        return (
+            <div className='row'>
+                <div className='col-md-12'>
+                    <div className="cards cards-info">
+                        {this.renderCard('homeless_map', 'I Need Help', './INeedHelp.png', helpText)}
+                        {this.renderCard('volunteers', 'I Want to Help', './volunteer-icon.png', volunteerText)}
+                        {this.renderCard('provider', 'I\'m a service provider', './provider_icon.png', providerText)}
+                    </div>
+                </div>
+            </div>
+        );
+    },
+    render(){
+        return (
+            <div>
+                {this.renderSummary()}
+                {this.renderPersonaCards()}
+            </div>
+        );
+    }
 });
 
 module.exports = LandingPage;
