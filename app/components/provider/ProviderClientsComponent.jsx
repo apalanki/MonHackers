@@ -3,7 +3,7 @@ import {Button} from 'react-bootstrap';
 import ClientCardComponent from '../client/ClientCardComponent.jsx';
 import ClientCheckoutModal from '../client/ClientCheckoutModal.jsx';
 import ClientReferalModal from '../client/ClientReferalModal.jsx';
-import ClientCheckinModal from '../client/ClientCheckinModal.jsx';
+import ClientCheckinModal from '../client/ClientCheckInModal.jsx';
 import _ from 'lodash';
 
 const ProviderClientsComponent = React.createClass({
