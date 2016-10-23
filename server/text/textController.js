@@ -1,5 +1,5 @@
 var questionsDataMap = {
-    '0': 'Welcome to MonCybers Text Registration Portal. Text YES to continue with registration',
+    '0': 'Welcome to Perfect Circle Registration. Text YES to continue with registration',
     'To begin the registration can you please give us your first name?': 'firstName',
     'Last name?': 'lastName',
     'Address or current location?': 'address',
@@ -53,8 +53,11 @@ module.exports = {
                 else logger.info('Successfully inserted responses for ', number);
                 answeredQuestions = [];
             });
-            // Save answers to Database and send appropriate data for further registration
-            return 'This completes partial registration. Please visit any of the shelters listed above to continue with registration';
+            return 'Based on your location, the closest shelters that have vacancy for you are: ' +
+                'Gateway Womens Shelter, 1000 N. 19th St. St. Louis, MO 63106 and \n' +
+                'Loaves & Fishes Inc., 2750 McKelvey Rd, Maryland Heights, MO 63043. \n' +
+                'You have registration for tonight. Please check in to any of the shelters ' +
+                'listed above to get an accommodation'
         } else {
             console.log('Start over a new session', answeredQuestions.length);
             currentNumber = number;
