@@ -17,7 +17,6 @@ function getNextQuestion() {
 
 module.exports = {
     maintainConversation: function (number, text) {
-        console.log('answered questions length: ', answeredQuestions.length);
         if (answeredQuestions.length === 0 && currentNumber === '') {
             console.log('first message');
             currentNumber = number;
@@ -30,7 +29,7 @@ module.exports = {
             } else {
                 return 'Hi ' + number + '. Thanks for texting us.' + questionsDataMap["0"];
             }
-        } else if (currentNumber === number && answeredQuestions.length > 0 && answeredQuestions.length <= Object.keys(questionsDataMap).length - 2) {
+        } else if (currentNumber === number && answeredQuestions.length > 0 && answeredQuestions.length < Object.keys(questionsDataMap).length - 2) {
             console.log('subsequent messages, answered questions length: ', answeredQuestions.length);
             answeredQuestions.push(text);
             return getNextQuestion();
