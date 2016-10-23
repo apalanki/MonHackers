@@ -17,6 +17,7 @@ function getNextQuestion() {
 
 module.exports = {
     maintainConversation: function (number, text) {
+        console.log('answered questions length: ', answeredQuestions.length);
         if (answeredQuestions.length === 0 && currentNumber === '') {
             console.log('first message');
             currentNumber = number;
