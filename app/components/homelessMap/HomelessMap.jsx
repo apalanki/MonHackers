@@ -24,7 +24,7 @@ let HomelessMap = React.createClass({
                 <GoogleMap
                     bootstrapURLKeys={{key: MapsApiKey}}
                     center={[38.668104, -90.335153]}
-                    zoom={12}>
+                    zoom={11}>
                     {this.getMarkers()}
                 </GoogleMap>
             </div>
