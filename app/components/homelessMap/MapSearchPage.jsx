@@ -34,10 +34,14 @@ var MapSearchPage = React.createClass({
         searchForShelters(this, {gender: this.state.gender, veteran: this.state.veteran});
     },
     handleGenderSelect(e) {
-        this.setState({gender: e.target.value});
+        this.setState({gender: e.target.value}, () => {
+            this.updateShelters(); 
+        });
     },
     handleVeteranSelect(e) {
-        this.setState({veteran: e.target.value});
+        this.setState({veteran: e.target.value}, () => {
+            this.updateShelters(); 
+        });
     },
     render(){
         return (
@@ -69,12 +73,14 @@ var MapSearchPage = React.createClass({
                         </FormControl>
                     </FormGroup>
                     &nbsp;&nbsp;
-                    <Button bsStyle="primary" onClick={this.updateShelters}>Filter</Button>
                 </Form>
                 <h4 className="col-md-4" style={{textAlign:"right"}} ><Link to="application">Apply here</Link> for services.</h4>
                 <br/><br/>
                 <HomelessMap shelters={this.state.shelters}/>
             </div>
+            //Here's the filter button. 
+            //<Button bsStyle="primary" onClick={this.updateShelters}>Filter</Button>
+
         );
     }
 });
