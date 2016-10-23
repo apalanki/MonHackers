@@ -24,6 +24,7 @@ var MapSearchPage = React.createClass({
         return {
             gender: 'Unspecified',
             veteran: 'Unspecified',
+            services: 'Unspecified',
             shelters: []
         };
     },
@@ -31,16 +32,21 @@ var MapSearchPage = React.createClass({
         searchForShelters(this, {});
     },
     updateShelters(){
-        searchForShelters(this, {gender: this.state.gender, veteran: this.state.veteran});
+        searchForShelters(this, {gender: this.state.gender, veteran: this.state.veteran, services: this.state.services});
     },
     handleGenderSelect(e) {
         this.setState({gender: e.target.value}, () => {
-            this.updateShelters(); 
+            this.updateShelters();
         });
     },
     handleVeteranSelect(e) {
         this.setState({veteran: e.target.value}, () => {
-            this.updateShelters(); 
+            this.updateShelters();
+        });
+    },
+    handleServiceSelect(e) {
+        this.setState({services: e.target.value}, () => {
+            this.updateShelters();
         });
     },
     render(){
@@ -71,6 +77,22 @@ var MapSearchPage = React.createClass({
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                         </FormControl>
+                        &nbsp;&nbsp;
+                        <ControlLabel>Services</ControlLabel>
+                        &nbsp;&nbsp;
+                        <FormControl componentClass="select" placeholder="Service Status"
+                                     onChange={this.handleServiceSelect}>
+                            <option value="Unspecified">...</option>
+                            <option value="Emergency Shelter">Emergency Shelters</option>
+                            <option value="Addiction Counseling">Addiction Counseling</option>
+                            <option value="Traditional Housing">Traditional Housing</option>
+                            <option value="Youth Programs">Youth Programs</option>
+                            <option value="VA Systems">VA Systems</option>
+                            <option value="Winter Only Shelters">Winter Only Shelters</option>
+                            <option value="Indepdendent Programs">Indepdendent Programs</option>
+                            <option value="Domestic Violence">Domestic Violence</option>
+                            <option value="Permanent Support Housing">Permanent Support Housing</option>
+                        </FormControl>
                     </FormGroup>
                     &nbsp;&nbsp;
                 </Form>
@@ -78,7 +100,7 @@ var MapSearchPage = React.createClass({
                 <br/><br/>
                 <HomelessMap shelters={this.state.shelters}/>
             </div>
-            //Here's the filter button. 
+            //Here's the filter button.
             //<Button bsStyle="primary" onClick={this.updateShelters}>Filter</Button>
 
         );

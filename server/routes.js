@@ -28,10 +28,11 @@ router.post('/applicant', (req, res) => {
 });
 
 router.get('/search', (req, res) => {
-	dao.shelterSearch(req.query, 
+	console.log(req.query);
+	dao.shelterSearch(req.query,
 		(err, result) => {
-			err ? returnFailure(res, err) :	 			
-				shelters.evaluate_capacity(result, 
+			err ? returnFailure(res, err) :
+				shelters.evaluate_capacity(result,
 					req.query,
 					function(evaluated_shelters){
 					returnSuccess(res, evaluated_shelters);
