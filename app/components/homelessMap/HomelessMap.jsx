@@ -14,7 +14,7 @@ let HomelessMap = React.createClass({
     shouldComponentUpdate: shouldPureComponentUpdate,
     getMarkers(){
         return this.props.shelters.map(function (shelter, index) {
-            return (<ShelterPin key={index} lat={shelter.latitude} lng={shelter.longitude}
+            return (<ShelterPin key={index} lat={shelter.latitude} shelter={shelter} lng={shelter.longitude}
                                 missing_requirements={shelter.missing_requirements} text={shelter.capacity_available}/>);
         });
     },
