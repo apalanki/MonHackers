@@ -1,5 +1,5 @@
 import React from 'react';
-let LoginModal = require('./LoginModal');
+import LoginModal from './LoginModal.jsx';
 
 const ProviderPortal = React.createClass({
     getInitialState(){
@@ -9,7 +9,7 @@ const ProviderPortal = React.createClass({
         };
     },
     setLoggedIn() {
-        this.setState({isLoggedIn:true});
+        this.setState({isLoggedIn: true});
     },
     openLoginModal() {
         this.setState({showLogInModal: true});
@@ -17,19 +17,19 @@ const ProviderPortal = React.createClass({
 
     closeLoginModal(successful) {
         this.setState({showLogInModal: false});
-        if(!successful) {
-            document.location.href='/';
+        if (!successful) {
+            document.location.href = '/';
         }
     },
     renderLoginModal() {
         return (
             <LoginModal
                 show={this.state.showLogInModal}
-                close={this.closeLoginModal} />
+                close={this.closeLoginModal}/>
         );
     },
     render(){
-        return(
+        return (
             <div className="form-container">
                 {this.renderLoginModal()}
                 <form className='form-padding'>

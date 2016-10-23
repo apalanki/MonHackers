@@ -6,6 +6,7 @@ var questionsDataMap = {
     'Is this the best number to reach you?': 'phoneNumber'
 };
 
+const logger = require('log4js').getLogger();
 var dao = require('../mongo/dao');
 var currentNumber = '';
 var answeredQuestions = [];
@@ -35,6 +36,11 @@ module.exports = {
         } else if (answeredQuestions.length === questionsDataMap.length - 1) {
             answeredQuestions.push(text);
             console.log('All questions answered', answeredQuestions);
+            dao.insertApplicant(JSON.stringify(answeredQuestions), (err, data) => {
+                if (err) logger.error(err);
+                else logger.info('Successfully inserted responses for ', number);
+                answeredQuestions = [];
+            });
             // Save answers to Database and send appropriate data for further registration
             return 'This completes partial registration. Please visit any of the shelters listed above to continue with registration';
         } else {
