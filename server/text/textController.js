@@ -45,17 +45,15 @@ module.exports = {
             answeredQuestions.push(t);
             return getNextQuestion();
         } else if (currentNumber === number && answeredQuestions.length === 3) {
-            if (text === 'yes') {
-                answeredQuestions.push({'phoneNumber': number});
-                console.log('All questions answered', answeredQuestions);
-                dao.insertApplicant(JSON.stringify(answeredQuestions.shift()), (err) => {
-                    if (err) logger.error(err);
-                    else logger.info('Successfully inserted responses for ', number);
-                    answeredQuestions = [];
-                });
-                // Save answers to Database and send appropriate data for further registration
-                return 'This completes partial registration. Please visit any of the shelters listed above to continue with registration';
-            }
+            answeredQuestions.push({'phoneNumber': number});
+            console.log('All questions answered', answeredQuestions);
+            dao.insertApplicant(JSON.stringify(answeredQuestions.shift()), (err) => {
+                if (err) logger.error(err);
+                else logger.info('Successfully inserted responses for ', number);
+                answeredQuestions = [];
+            });
+            // Save answers to Database and send appropriate data for further registration
+            return 'This completes partial registration. Please visit any of the shelters listed above to continue with registration';
         } else {
             console.log('Start over a new session', answeredQuestions.length);
             currentNumber = number;
