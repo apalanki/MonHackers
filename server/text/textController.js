@@ -21,7 +21,6 @@ function getNextQuestionKey() {
 
 module.exports = {
     maintainConversation: function (number, text) {
-        console.log(answeredQuestions.length);
         if (answeredQuestions.length === 0 && currentNumber === '') {
             console.log('first message');
             currentNumber = number;
@@ -47,7 +46,9 @@ module.exports = {
         } else if (currentNumber === number && answeredQuestions.length === 3) {
             answeredQuestions.push({'phoneNumber': number});
             console.log('All questions answered', answeredQuestions);
-            dao.insertApplicant(JSON.stringify(answeredQuestions.shift()), (err) => {
+            // Pop out the first element
+            answeredQuestions.shift();
+            dao.insertApplicant(JSON.stringify(answeredQuestions), (err) => {
                 if (err) logger.error(err);
                 else logger.info('Successfully inserted responses for ', number);
                 answeredQuestions = [];
