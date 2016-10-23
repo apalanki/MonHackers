@@ -19,7 +19,7 @@ const volunteerText = `Do you have some free time, a special skill, or
 						resources to help out? Help us to help someone in
 						need. You have more to offer than you imagine
 						and you could help change someones life.`;
-const providerText = `Manager your services through your provider portal.
+const providerText = `Manage your services through your provider portal.
 						Allocate resources and help clients find the help they need.`;
 
 const LandingPage = React.createClass({
