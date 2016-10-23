@@ -27,7 +27,7 @@ export default class LandingPage extends React.Component{
 
 				<div className="card card-hover">
 					<div className="card-header">
-						<h3>I Want to Help</h3>
+						<h3><Link to="volunteers">I Want to Offer Help</Link></h3>
 					</div>
 					<img src = "./volunteer-icon.png" />
 					<div className="card-block">
