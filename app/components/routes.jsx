@@ -2,7 +2,7 @@ import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import LandingPage from './LandingPage.jsx';
-import ProviderPortal from './ProviderPortal.jsx';
+import ProviderPortal from './provider/ProviderPortal.jsx';
 
 let MapSearchPage = require('./homelessMap/MapSearchPage.jsx');
 import PersonApplicationComponent from './personApplicationComponent.jsx';

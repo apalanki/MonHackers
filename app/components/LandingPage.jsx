@@ -4,8 +4,8 @@ import {Link} from 'react-router';
 export default class LandingPage extends React.Component{
 	render(){
 		return(
-			<div className="cards">
-				<div className="card">
+			<div className="cards cards-info">
+				<div className="card card-hover">
 					<div className="card-header">
 						<Link to="provider"><h3>I'm a Service Provider</h3></Link>
 					</div>
@@ -15,7 +15,7 @@ export default class LandingPage extends React.Component{
 					</div>
 				</div>
 
-				<div className="card">
+				<div className="card card-hover">
 					<div className="card-header">
 						<Link to="homeless_map"><h3>I Need Assistance</h3></Link>
 					</div>
@@ -25,7 +25,7 @@ export default class LandingPage extends React.Component{
 					</div>
 				</div>
 
-				<div className="card">
+				<div className="card card-hover">
 					<div className="card-header">
 						<h3>I Want to Help</h3>
 					</div>
