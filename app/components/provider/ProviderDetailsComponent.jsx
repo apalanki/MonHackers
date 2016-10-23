@@ -53,52 +53,45 @@ const ProviderDetailsComponent = React.createClass({
             )
         }
     },
+    renderDataHeader(header) {
+        return (
+            <div className='row'>
+                <div className='col-md-12'>
+                    <h3 className='underline'>{header}</h3>
+                </div>
+            </div>
+        );
+    },
+    renderDataColumn(title, value) {
+        return(
+            <div className='col-md-4'>
+                <h4>{title} </h4>{value}
+            </div>
+        );
+    },
     renderStaticDetails() {
         return (
             <div>
                 {this.renderButtons()}
+                {this.renderDataHeader('Contact Information')}
                 <div className='row'>
-                    <div className='col-md-12'>
-                        <h3 className='underline'>Contact Information</h3>
-                    </div>
+                    {this.renderDataColumn('Address:', this.state.provider.address)}
+                    {this.renderDataColumn('Phone Number:', this.state.provider.phone)}
+                    {this.renderDataColumn('Email:', this.state.provider.email)}
                 </div>
-                <div className='row'>
-                    <div className='col-md-4'>
-                        <h4>Address: </h4>{this.state.provider.address}
-                    </div>
-                    <div className='col-md-4'>
-                        <h4>Phone Number: </h4>{this.state.provider.phone}
-                    </div>
-                    <div className='col-md-4'>
-                        <h4>Email: </h4>{this.state.provider.email}
-                    </div>
-                </div>
-                <div className='row'>
-                    <div className='col-md-12'>
-                        <h4 className='underline'>Services</h4>
-                    </div>
-                </div>
+                {this.renderDataHeader('Services')}
                 <div className='row'>
                     <div className='col-md-6'>
                         {this.state.provider.services.join(', ')}
                     </div>
                 </div>
-                <div className='row'>
-                    <div className='col-md-12'>
-                        <h4 className='underline'>Restrictions</h4>
-                    </div>
-                </div>
+                {this.renderDataHeader('Restrictions')}
                 <div className='row'>
                     <div className='col-md-12'>
                         {this.state.provider.restrictions}
                     </div>
                 </div>
-
-                <div className='row'>
-                    <div className='col-md-12'>
-                        <h4 className='underline'>Resources</h4>
-                    </div>
-                </div>
+                {this.renderDataHeader('Resources')}
                 <div className='row'>
                     {this.state.provider.resources.map((resource, index) => {
                         return (
@@ -111,49 +104,34 @@ const ProviderDetailsComponent = React.createClass({
             </div>
         );
     },
+    renderTextField(controlId, label, value) {
+        return (
+            <FormGroup controlId={controlId}>
+                <ControlLabel>{label}</ControlLabel>
+                <FormControl type="text"
+                    value={value}
+                    onChange={(event) => { this.handleChange(controlId, event.target.value);}}
+                />
+            </FormGroup>
+        )
+    },
     renderEditableDetails() {
         return (
             <div>
                 {this.renderButtons()}
-                <div className='row'>
-                    <div className='col-md-12'>
-                        <h3 className='underline'>Contact Information</h3>
-                    </div>
-                </div>
+                {this.renderDataHeader('Contact Information')}
                 <div className='row'>
                     <div className='col-md-4'>
-                        <FormGroup controlId='address'>
-                            <ControlLabel>Address</ControlLabel>
-                            <FormControl type="text"
-                                value={this.state.provider.address}
-                                onChange={(event) => { this.handleChange('address', event.target.value);}}
-                            />
-                        </FormGroup>
+                        {this.renderTextField('address', 'Address', this.state.provider.address)}
                     </div>
                     <div className='col-md-4'>
-                        <FormGroup controlId='phone'>
-                            <ControlLabel>Phone Number</ControlLabel>
-                            <FormControl type='text'
-                                value={this.state.provider.phone}
-                                onChange={(event) => { this.handleChange('phone', event.target.value);}}
-                            />
-                        </FormGroup>
+                        {this.renderTextField('phone', 'Phone Number', this.state.provider.phone)}
                     </div>
                     <div className='col-md-4'>
-                        <FormGroup controlId='email'>
-                            <ControlLabel>Email</ControlLabel>
-                            <FormControl type='text'
-                                value={this.state.provider.email}
-                                onChange={(event) => { this.handleChange('email', event.target.value);}}
-                            />
-                        </FormGroup>
+                        {this.renderTextField('email', 'Email', this.state.provider.email)}
                     </div>
                 </div>
-                <div className='row'>
-                    <div className='col-md-12'>
-                        <h4 className='underline'>Services</h4>
-                    </div>
-                </div>
+                {this.renderDataHeader('Services')}
                 <div>
                     <div className='row'>
                         <div className='col-md-3'>
@@ -188,28 +166,13 @@ const ProviderDetailsComponent = React.createClass({
                         </div>
                     </div>
                 </div>
-                <div className='row'>
-                    <div className='col-md-12'>
-                        <h4 className='underline'>Restrictions</h4>
-                    </div>
-                </div>
+                {this.renderDataHeader('Restrictions')}
                 <div className='row'>
                     <div className='col-md-6'>
-                        <FormGroup controlId='restrictions'>
-                            <ControlLabel>Restrictions</ControlLabel>
-                            <FormControl type='text'
-                                value={this.state.provider.restrictions}
-                                onChange={(event) => { this.handleChange('restrictions', event.target.value);}}
-                            />
-                        </FormGroup>
+                        {this.renderTextField('restrictions', 'Restrictions', this.state.provider.restrictions)}
                     </div>
                 </div>
-
-                <div className='row'>
-                    <div className='col-md-12'>
-                        <h4 className='underline'>Resources</h4>
-                    </div>
-                </div>
+                {this.renderDataHeader('Resources')}
                 <div className='row'>
                     <div className='col-md-12'>
                         {this.state.provider.resources.map((resource, index) => {
