@@ -149,13 +149,18 @@
   background-color: white;
   text-align: center;
 }
-
+.card.opaque{
+	opacity: 1;
+}
 .card:hover{
 	opacity: 1;
 }
 
 .card-block {
-  padding: 1.25rem;
+  padding: 10px;
+}
+.card .form-group{
+	padding:10px;
 }
 .card-title {
   margin-bottom: .75rem;

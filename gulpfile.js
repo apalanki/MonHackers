@@ -9,7 +9,7 @@ gulp.task('bundle', function() {
     return browserify({
         entries: './app/components/routes.jsx',
         debug: true
-    }).transform(babelify, {presets: ['babel-fast-presets/es2015-stage1', 'react']})
+    }).transform(babelify, {presets: ['es2015', 'react', 'stage-0']})
         .bundle()
         .pipe(source('main.js'))
         .pipe(gulp.dest('deploy'));
