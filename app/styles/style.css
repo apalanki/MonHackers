@@ -162,6 +162,17 @@
   background-color: white;
 }
 
+.card-selected {
+  border: 1px solid black;
+  margin-bottom: .75rem;
+  border-radius: 5px;
+  width: 218.0156px;
+  flex:1;
+  margin-right:10px;
+  margin-left:10px;
+  background-color: lightBlue;
+}
+
 .card-padding {
 	padding-top:20px;
 	display: flex;

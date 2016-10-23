@@ -1,11 +1,15 @@
 import React from 'react';
 import {Button} from 'react-bootstrap';
 import ClientCardComponent from '../client/ClientCardComponent.jsx';
+import ClientCheckoutModal from '../client/ClientCheckoutModal.jsx';
+import _ from 'lodash';
 
 const ProviderClientsComponent = React.createClass({
     getInitialState() {
         return {
-            clients: []
+            clients: [],
+            showCheckoutModal: false,
+            selectedClient: {}
         };
     },
     componentWillReceiveProps(nextProps) {
@@ -15,15 +19,49 @@ const ProviderClientsComponent = React.createClass({
 // TODO check in modal
     },
     checkOut() {
-// TODO check out modal
+        this.closeModal('showCheckoutModal');
+        const currentClients = this.state.clients;
+        const selectedName = this.state.selectedClient.name;
+        const filteredClients = _.filter(currentClients, (currentClient) => {
+            return currentClient.name !== selectedName;
+        });
+        this.setState({clients: filteredClients, selectedClient: {}});
     },
     referClient() {
 // TODO refer modal
+    },
+    openModal(field) {
+        const newState = {};
+        newState[field] = true;
+        this.setState(newState);
+    },
+    closeModal(field) {
+        const newState = {};
+        newState[field] = false;
+        this.setState(newState);
+    },
+    selectClient(client) {
+        const currentClient = this.state.selectedClient;
+        if(client === currentClient) {
+            this.setState({selectedClient: {}});
+        } else {
+            this.setState({selectedClient: client});
+        }
+    },
+    renderClientCheckout() {
+        return (
+            <ClientCheckoutModal show={this.state.showCheckoutModal}
+                close={this.closeModal}
+                checkOut={this.checkOut}
+                name={this.state.selectedClient.name} />
+        );
     },
     renderClientCard(client, index) {
         return (
             <div className='col-md-3 card-padding' key={`clientCard${index}`}>
                 <ClientCardComponent
+                    selectClient={this.selectClient}
+                    isSelected={this.state.selectedClient === client}
                     key={`clientCard${index}`}
                     client={client} />
             </div>
@@ -32,6 +70,7 @@ const ProviderClientsComponent = React.createClass({
     render() {
         return (
             <div>
+                {this.renderClientCheckout()}
                 <div className='row top-padding'>
                     <div className='col-md-4'>
                         <h3 className='underline'>Clients</h3>
@@ -46,8 +85,8 @@ const ProviderClientsComponent = React.createClass({
                     <div className='col-md-1 top-padding'>
                         <Button id='checkOut'
                             bsStyle='default'
-                            onClick={this.checkOut}
-                            disabled={!this.state.selectedCard}>
+                            onClick={() => {this.openModal('showCheckoutModal');}}
+                            disabled={!this.state.selectedClient.name}>
                             Check Out
                         </Button>
                     </div>
@@ -55,7 +94,7 @@ const ProviderClientsComponent = React.createClass({
                         <Button id='referal'
                             bsStyle='default'
                             onClick={this.referClient}
-                            disabled={!this.state.selectedCard}>
+                            disabled={!this.state.selectedClient.name}>
                             Refer Client
                         </Button>
                     </div>
