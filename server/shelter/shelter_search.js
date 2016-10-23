@@ -7,10 +7,9 @@ var is_missing = function (client, property) {
 
 var add_missing_attributes = function (shelter) {
     shelter['missing_requirements'] = [];
-    has_gender_requirement = ((shelter['single_men_18+'] != 'yes') 
+    var has_gender_requirement = ((shelter['single_men_18+'] != 'yes') 
         || (shelter['single_women_18+'] != 'yes'));
 
-    console.log("Has has_gender_requirement? ", has_gender_requirement);
     if (is_missing(shelter['client'], 'gender') && 
             has_gender_requirement){
         shelter['missing_requirements'] = ['gender'];
