@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const dao = require('./mongo/dao');
-// const shelters = require('./shelter/shelterSearch.js');
+const shelters = require('./shelter/shelter_search.js');
 // const geoCodeData = require('./geocode/geocodeData');
 
 function returnFailure(res, err) {
@@ -31,7 +31,11 @@ router.get('/search', (req, res) => {
     dao.shelterSearch(req.query, 
     	(err, result) => {
     		err ? returnFailure(res, err) :     			
-    			returnSuccess(res, result)
+    			shelters.evaluate_capacity(result, 
+    				req.query,
+    				function(evaluated_shelters){
+    				returnSuccess(res, evaluated_shelters);
+    			});
     	});
 });
 
