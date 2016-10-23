@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, FormGroup, ControlLabel, FormControl, CheckBox} from 'react-bootstrap';
+import {Alert, Button, FormGroup, ControlLabel, FormControl, CheckBox} from 'react-bootstrap';
 var DatePicker = require('react-bootstrap-date-picker');
 import Typeahead from 'react-bootstrap-typeahead';
 import referenceData from '../util/referenceData';
@@ -9,6 +9,7 @@ const PersonApplicationComponent = React.createClass({
     getInitialState() {
         return {
             fullForm: false,
+            saved: false,
             application: {
                 gender: [],
                 ethnicity: [],
@@ -51,8 +52,6 @@ const PersonApplicationComponent = React.createClass({
         this.setState({application: application});
     },
     renderDemographicInformation() {
-
-
         return (
             <div>
                 <div className="row">
@@ -541,20 +540,21 @@ const PersonApplicationComponent = React.createClass({
                 if (err) {
                     console.log('error : ', err);
                 } else {
-                    console.log('saved successfully!');
+                    this.setState({saved: true})
                 }
             });
     },
     renderFullForm() {
         return (
             <div className='form-container'>
+                {this.renderMessage()}
                 <form className='form-padding'>
                     <div className="row">
                         <div className="col-md-8">
                             <h2 className="application-header">Application For Services</h2>
                         </div>
                         <div className="col-md-12">
-                            <h5>Full Form &nbsp;&nbsp;<input type="checkbox" checked={this.state.fullForm} value="fullForm" onChange={() => {this.setState({fullForm: !this.state.fullForm});}} /> 
+                            <h5>Full Form &nbsp;&nbsp;<input type="checkbox" checked={this.state.fullForm} value="fullForm" onChange={() => {this.setState({fullForm: !this.state.fullForm});}} />
                             </h5>
                         </div>
                     </div>
@@ -652,6 +652,7 @@ const PersonApplicationComponent = React.createClass({
     renderShortForm() {
         return (
             <div className='form-container'>
+                {this.renderMessage()}
                 <form className='form-padding'>
                     <div className="row">
                         <div className="col-md-8">
@@ -659,7 +660,7 @@ const PersonApplicationComponent = React.createClass({
                         </div>
                         <div className="col-md-12">
                             <h5>Full Form &nbsp;&nbsp;
-                            <input type="checkbox" checked={this.state.fullForm} value="fullForm" onChange={() => {this.setState({fullForm: !this.state.fullForm});}} /> 
+                            <input type="checkbox" checked={this.state.fullForm} value="fullForm" onChange={() => {this.setState({fullForm: !this.state.fullForm});}} />
                             </h5>
                         </div>
                     </div>
@@ -697,6 +698,19 @@ const PersonApplicationComponent = React.createClass({
                 </form>
             </div>
         );
+    },
+    renderMessage() {
+        if(this.state.saved) {
+            return (
+                <div className='row'>
+                    <div className='col-md-12'>
+                        <Alert bsStyle="success">
+                            Your application has been saved successfully
+                        </Alert>
+                    </div>
+                </div>
+            )
+        }
     },
     render() {
         if(this.state.fullForm) {
