@@ -23,7 +23,7 @@ module.exports = {
             return 'Hi ' + number + '. Thanks for texting us.' + questionsDataMap["0"];
         } else if (currentNumber === number && answeredQuestions.length === 0) {
             console.log('second message');
-            if (text === 'YES' || text === 'yes') {
+            if (text.toLowerCase() === 'yes') {
                 answeredQuestions.push(text);
                 return getNextQuestion();
             } else {
