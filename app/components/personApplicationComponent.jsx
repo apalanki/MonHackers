@@ -51,64 +51,70 @@ const PersonApplicationComponent = React.createClass({
         }
         this.setState({application: application});
     },
+    renderTextField(controlId, label, value) {
+        return (
+            <div className='col-md-4'>
+                <FormGroup controlId={controlId}>
+                    <ControlLabel>{label}</ControlLabel>
+                    <FormControl type="text" placeholder={label}
+                        value={value}
+                        onChange={(event) => { this.handleChange(controlId, event.target.value);}}
+                    />
+                </FormGroup>
+            </div>
+        );
+    },
+    renderTypeahead(label, placeholder, key, options, selected) {
+        return (
+            <div className="col-md-4">
+                <ControlLabel>{label}</ControlLabel>
+                <Typeahead
+                    placeholder={placeholder}
+                    onChange={(value) => {this.handleChange(key, value);}}
+                    options={options}
+                    selected={selected}
+                />
+            </div>
+        );
+    },
+    renderDateField(controlId, label, value, key) {
+        return (
+            <div className="col-md-4">
+                <FormGroup controlId={controlId}>
+                    <ControlLabel>{label}</ControlLabel>
+                    <DatePicker value={value}
+                        onChange={(value) => { this.handleChange(key, value);}} />
+                </FormGroup>
+            </div>
+        );
+    },
+    renderCheckBox(values, value, label) {
+        return (
+            <div className='col-md-3'>
+                <input type='checkbox' checked={values.includes(value)} value={value} onChange={(event) => {this.handleServices(event.target.value);}} /> {label}
+            </div>
+        );
+    },
+    renderCheckBoxRow(checkboxes) {
+        return (
+            <div className='row'>
+                {this.renderCheckBox(checkboxes[0].values, checkboxes[0].value, checkboxes[0].label)}
+                {this.renderCheckBox(checkboxes[1].values, checkboxes[1].value, checkboxes[1].label)}
+            </div>
+        );
+    },
     renderDemographicInformation() {
         return (
             <div>
                 <div className="row">
-                    <div className="col-md-4">
-                        <FormGroup controlId="firstName">
-                            <ControlLabel>First Name</ControlLabel>
-                            <FormControl type="text" placeholder="First Name"
-                                value={this.state.application.firstName}
-                                onChange={(event) => { this.handleChange('firstName', event.target.value);}}
-                            />
-                        </FormGroup>
-                    </div>
-                    <div className="col-md-4">
-                        <FormGroup controlId="middleName">
-                            <ControlLabel>Middle Name</ControlLabel>
-                            <FormControl type="text" placeholder="Middle Name"
-                                value={this.state.application.middleName}
-                                onChange={(event) => { this.handleChange('middleName', event.target.value);}}
-                            />
-                        </FormGroup>
-                    </div>
-                    <div className="col-md-4">
-                        <FormGroup controlId="lastName">
-                            <ControlLabel>Last Name</ControlLabel>
-                            <FormControl type="text" placeholder="Last Name"
-                                value={this.state.application.lastName}
-                                onChange={(event) => { this.handleChange('lastName', event.target.value);}}
-                            />
-                        </FormGroup>
-                    </div>
+                    {this.renderTextField('firstName', 'First Name', this.state.application.firstName)}
+                    {this.renderTextField('middleName', 'Middle Name', this.state.application.middleName)}
+                    {this.renderTextField('lastName', 'Last Name', this.state.application.lastName)}
                 </div>
                 <div className="row">
-                    <div className="col-md-4">
-                        <ControlLabel>Gender</ControlLabel>
-                        <Typeahead
-                            placeholder="Select your gender"
-                            onChange={(value) => {this.handleChange('gender', value);}}
-                            options={referenceData.genders}
-                            selected={this.state.application.gender}
-                        />
-                    </div>
-                    <div className="col-md-4">
-                          <ControlLabel>Ethnicity</ControlLabel>
-                          <Typeahead
-                              placeholder="Select your ethnicity"
-                              onChange={(value) => {this.handleChange('ethnicity', value);}}
-                              options={referenceData.ethnicities}
-                              selected={this.state.application.ethnicity}
-                          />
-                    </div>
-                    <div className="col-md-4">
-                        <FormGroup controlId="dateOfBirth">
-                            <ControlLabel>Date of Birth</ControlLabel>
-                            <DatePicker value={this.state.application.dob}
-                                onChange={(value) => { this.handleChange('dob', value);}} />
-                        </FormGroup>
-                    </div>
+                    {this.renderTypeahead('Gender', 'Select your gender', 'gender', referenceData.genders, this.state.application.gender)}
+                    {this.renderTypeahead('Ethnicity', 'Select your ethnicity', 'ethnicity', referenceData.ethnicities, this.state.application.ethnicity)}
+                    {this.renderDateField('dateOfBirth', 'Date of Birth', this.state.application.dob, 'dob')}
                 </div>
             </div>
         );
@@ -116,33 +122,9 @@ const PersonApplicationComponent = React.createClass({
     renderContactInformation() {
         return(
             <div className="row">
-                <div className="col-md-4">
-                    <FormGroup controlId="address">
-                        <ControlLabel>Address</ControlLabel>
-                        <FormControl type="text" placeholder="Address"
-                            value={this.state.application.address}
-                            onChange={(event) => { this.handleChange('address', event.target.value);}}
-                        />
-                    </FormGroup>
-                </div>
-                <div className="col-md-4">
-                    <FormGroup controlId="phoneNumber">
-                        <ControlLabel>Phone Number</ControlLabel>
-                        <FormControl type="text" placeholder="Phone Number"
-                            value={this.state.application.phoneNumber}
-                            onChange={(event) => { this.handleChange('phoneNumber', event.target.value);}}
-                        />
-                    </FormGroup>
-                </div>
-                <div className="col-md-4">
-                    <FormGroup controlId="email">
-                        <ControlLabel>Email Address</ControlLabel>
-                        <FormControl type="text" placeholder="Email Address"
-                            value={this.state.application.email}
-                            onChange={(event) => { this.handleChange('email', event.target.value);}}
-                        />
-                    </FormGroup>
-                </div>
+                {this.renderTextField('address', 'Address', this.state.application.address)}
+                {this.renderTextField('phoneNumber', 'Phone Number', this.state.application.phoneNumber)}
+                {this.renderTextField('email', 'Email Address', this.state.application.email)}
             </div>
         );
     },
@@ -151,106 +133,34 @@ const PersonApplicationComponent = React.createClass({
             return (
                 <div>
                     <div className="row">
-                        <div className="col-md-4">
-                            <ControlLabel>Are you a Veteran</ControlLabel>
-                            <Typeahead
-                                placeholder="Are you a Veteran"
-                                onChange={(value) => {this.handleChange('veteranStatus', value);}}
-                                options={referenceData.yesNoOptions}
-                                selected={this.state.application.veteranStatus}
-                            />
-                        </div>
-                        <div className="col-md-4">
-                            <FormGroup controlId="yearEntered">
-                                <ControlLabel>Year Entered Service</ControlLabel>
-                                <FormControl type="text" placeholder="Year Entered"
-                                    value={this.state.application.yearEntered}
-                                    onChange={(event) => { this.handleChange('yearEntered', event.target.value);}}
-                                />
-                            </FormGroup>
-                        </div>
-                        <div className="col-md-4">
-                            <FormGroup controlId="yearSeparated">
-                                <ControlLabel>Year Separated</ControlLabel>
-                                <FormControl type="text" placeholder="Year Separated"
-                                    value={this.state.application.yearSeparated}
-                                    onChange={(event) => { this.handleChange('yearSeparated', event.target.value);}}
-                                />
-                            </FormGroup>
-                        </div>
+                        {this.renderTypeahead('Are you a Veteran', 'Are you a Veteran', 'veteranStatus', referenceData.yesNoOptions, this.state.application.veteranStatus)}
+                        {this.renderTextField('yearEntered', 'Year Entered Service', this.state.application.yearEntered)}
+                        {this.renderTextField('yearSeparated', 'Year Separated', this.state.application.yearSeparated)}
                     </div>
                     <div className="row">
-                        <div className="col-md-4">
-                            <ControlLabel>Theater</ControlLabel>
-                            <Typeahead
-                                placeholder="Theater"
-                                onChange={(value) => {this.handleChange('theater', value);}}
-                                options={referenceData.theater}
-                                selected={this.state.application.theater}
-                            />
-                        </div>
-                        <div className="col-md-4">
-                            <ControlLabel>Branch</ControlLabel>
-                            <Typeahead
-                                placeholder="Branch"
-                                onChange={(value) => {this.handleChange('branch', value);}}
-                                options={referenceData.branch}
-                                selected={this.state.application.branch}
-                            />
-                        </div>
-                        <div className="col-md-4">
-                            <ControlLabel>Discharge Status</ControlLabel>
-                            <Typeahead
-                                placeholder="Discharge Status"
-                                onChange={(value) => {this.handleChange('dischargeStatus', value);}}
-                                options={referenceData.dischargeStatus}
-                                selected={this.state.application.dischargeStatus}
-                            />
-                        </div>
+                        {this.renderTypeahead('Theater', 'Theater', 'theater', referenceData.theater, this.state.application.theater)}
+                        {this.renderTypeahead('Branch', 'Branch', 'branch', referenceData.branch, this.state.application.branch)}
+                        {this.renderTypeahead('Discharge Status', 'Discharge Status', 'dischargeStatus', referenceData.dischargeStatus, this.state.application.dischargeStatus)}
                     </div>
                 </div>
             );
         } else {
             return(
                 <div className="row">
-                    <div className="col-md-4">
-                        <ControlLabel>Are you a Veteran</ControlLabel>
-                        <Typeahead
-                            placeholder="Are you a Veteran"
-                            onChange={(value) => {this.handleChange('veteranStatus', value);}}
-                            options={referenceData.yesNoOptions}
-                            selected={this.state.application.veteranStatus}
-                        />
-                    </div>
+                    {this.renderTypeahead('Are you a Veteran', 'Are you a Veteran', 'veteranStatus', referenceData.yesNoOptions, this.state.application.veteranStatus)}
                 </div>
             );
         }
     },
     renderHousingQuestion() {
-        return (
-            <div className='col-md-4'>
-                <ControlLabel>Housing Status</ControlLabel>
-                <Typeahead
-                    placeholder="Housing Status"
-                    onChange={(value) => {this.handleChange('housingStatus', value);}}
-                    options={referenceData.housing}
-                    selected={this.state.application.housingStatus}
-                />
-            </div>
-        );
+        return this.renderTypeahead('Housing Status', 'Housing Status', 'housingStatus', referenceData.housing, this.state.application.housingStatus);
     },
     renderHousing() {
         if(this.state.application.housingStatus.includes('Homeless') || this.state.application.housingStatus.includes('Homeless only under other federal statuses')) {
             return (
                 <div className="row">
                     {this.renderHousingQuestion()}
-                    <div className="col-md-4">
-                        <FormGroup controlId="dateHomeless">
-                            <ControlLabel>Date homelessness began</ControlLabel>
-                            <DatePicker value={this.state.application.dateHomeless}
-                                onChange={(value) => { this.handleChange('dateHomeless', value);}} />
-                        </FormGroup>
-                    </div>
+                    {this.renderDateField('dateHomeless', 'Date homelessness began', this.state.application.dateHomeless, 'dateHomeless')}
                 </div>
             );
         } else {
@@ -262,47 +172,21 @@ const PersonApplicationComponent = React.createClass({
         }
     },
     renderEmployedQuestion() {
-        return (
-            <div className="col-md-4">
-                <ControlLabel>Are you Employed</ControlLabel>
-                <Typeahead
-                    placeholder="Are you Employed"
-                    onChange={(value) => {this.handleChange('employed', value);}}
-                    options={referenceData.yesNoOptions}
-                    selected={this.state.application.employed}
-                />
-            </div>
-        );
+        return this.renderTypeahead('Are you Employed', 'Are you Employed', 'employed', referenceData.yesNoOptions, this.state.application.employed);
     },
     renderEmployment() {
         if(this.state.application.employed.includes('Yes')) {
             return (
                 <div className='row'>
                     {this.renderEmployedQuestion()}
-                    <div className='col-md-4'>
-                        <ControlLabel>Employment Type</ControlLabel>
-                        <Typeahead
-                            placeholder="Employment Type"
-                            onChange={(value) => {this.handleChange('employmentType', value);}}
-                            options={referenceData.employmentType}
-                            selected={this.state.application.employmentType}
-                        />
-                    </div>
+                    {this.renderTypeahead('Employment Type', 'Employment Type', 'employmentType', referenceData.employmentType, this.state.application.employmentType)}
                 </div>
             );
         } else if(this.state.application.employed.includes('No')) {
             return (
                 <div className='row'>
                     {this.renderEmployedQuestion()}
-                    <div className='col-md-4'>
-                        <ControlLabel>Reason not employed</ControlLabel>
-                        <Typeahead
-                            placeholder="Reason not employed"
-                            onChange={(value) => {this.handleChange('reasonNotEmployed', value);}}
-                            options={referenceData.notWorkingReasons}
-                            selected={this.state.application.reasonNotEmployed}
-                        />
-                    </div>
+                    {this.renderTypeahead('Reason not employed', 'Reason not employed', 'reasonNotEmployed', referenceData.notWorkingReasons, this.state.application.reasonNotEmployed)}
                 </div>
             );
         } else {
@@ -316,94 +200,30 @@ const PersonApplicationComponent = React.createClass({
     renderEducation() {
         return (
             <div className='row'>
-                <div className='col-md-4'>
-                    <ControlLabel>School Status</ControlLabel>
-                    <Typeahead
-                        placeholder="School Status"
-                        onChange={(value) => {this.handleChange('schoolStatus', value);}}
-                        options={referenceData.schoolStatus}
-                        selected={this.state.application.schoolStatus}
-                    />
-                </div>
-                <div className='col-md-4'>
-                    <ControlLabel>Last Grade Completed</ControlLabel>
-                    <Typeahead
-                        placeholder="Last Grade Completed"
-                        onChange={(value) => {this.handleChange('lastGrade', value);}}
-                        options={referenceData.lastGradeCompleted}
-                        selected={this.state.application.lastGrade}
-                    />
-                </div>
+                {this.renderTypeahead('School Status', 'School Status', 'schoolStatus', referenceData.schoolStatus, this.state.application.schoolStatus)}
+                {this.renderTypeahead('Last Grade Completed', 'Last Grade Completed', 'lastGrade', referenceData.lastGradeCompleted, this.state.application.lastGrade)}
             </div>
         );
     },
     renderHealth() {
         return (
             <div className='row'>
-                <div className='col-md-4'>
-                    <ControlLabel>General Health</ControlLabel>
-                    <Typeahead
-                        placeholder="General Health"
-                        onChange={(value) => {this.handleChange('generalHealth', value);}}
-                        options={referenceData.healthStatus}
-                        selected={this.state.application.generalHealth}
-                    />
-                </div>
-                <div className='col-md-4'>
-                    <ControlLabel>Dental Health</ControlLabel>
-                    <Typeahead
-                        placeholder="Dental Health"
-                        onChange={(value) => {this.handleChange('dentalHealth', value);}}
-                        options={referenceData.healthStatus}
-                        selected={this.state.application.dentalHealth}
-                    />
-                </div>
-                <div className='col-md-4'>
-                    <ControlLabel>Mental Health</ControlLabel>
-                    <Typeahead
-                        placeholder="Mental Health"
-                        onChange={(value) => {this.handleChange('mentalHealth', value);}}
-                        options={referenceData.healthStatus}
-                        selected={this.state.application.mentalHealth}
-                    />
-                </div>
+                {this.renderTypeahead('General Health', 'General Health', 'generalHealth', referenceData.healthStatus, this.state.application.generalHealth)}
+                {this.renderTypeahead('Dental Health', 'Dental Health', 'dentalHealth', referenceData.healthStatus, this.state.application.dentalHealth)}
+                {this.renderTypeahead('Mental Health', 'Mental Health', 'mentalHealth', referenceData.healthStatus, this.state.application.mentalHealth)}
             </div>
         );
     },
     renderDomesticViolenceQuestion() {
-        return (
-            <div className='col-md-4'>
-                <ControlLabel>Victim of Domestic Violene</ControlLabel>
-                <Typeahead
-                    placeholder="Victem of Domestic Violence"
-                    onChange={(value) => {this.handleChange('domesticViolence', value);}}
-                    options={referenceData.yesNoOptions}
-                    selected={this.state.application.domesticViolence}
-                />
-            </div>
-        );
+        return this.renderTypeahead('Victem of Domestic Violence', 'Victem of Domestic Violence', 'domesticViolence', referenceData.yesNoOptions, this.state.application.domesticViolence);
     },
     renderDomesticViolence() {
         if(this.state.application.domesticViolence.includes('Yes')) {
             return (
                 <div className='row'>
                     {this.renderDomesticViolenceQuestion()}
-                    <div className='col-md-4'>
-                        <FormGroup controlId="domesticViolenceStart">
-                            <ControlLabel>Date domestic violence began</ControlLabel>
-                            <DatePicker value={this.state.application.domesticViolenceStart}
-                                onChange={(value) => { this.handleChange('domesticViolenceStart', value);}} />
-                        </FormGroup>
-                    </div>
-                    <div className='col-md-4'>
-                        <ControlLabel>Currently Fleeing</ControlLabel>
-                        <Typeahead
-                            placeholder="Currently Fleeing"
-                            onChange={(value) => {this.handleChange('fleeingDomesticViolence', value);}}
-                            options={referenceData.yesNoOptions}
-                            selected={this.state.application.fleeingDomesticViolence}
-                        />
-                    </div>
+                    {this.renderDateField('domesticViolenceStart', 'Date domestic violence began', this.state.application.domesticViolenceStart, 'domesticViolenceStart')}
+                    {this.renderTypeahead('Currently Fleeing', 'Currently Fleeing', 'fleeingDomesticViolence', referenceData.yesNoOptions, this.state.application.fleeingDomesticViolence)}
                 </div>
             );
         } else {
@@ -415,30 +235,14 @@ const PersonApplicationComponent = React.createClass({
         }
     },
     renderPregnancyQuestion() {
-        return (
-            <div className='col-md-4'>
-                <ControlLabel>Are you pregnant</ControlLabel>
-                <Typeahead
-                    placeholder="Are you pregnant"
-                    onChange={(value) => {this.handleChange('pregnant', value);}}
-                    options={referenceData.yesNoOptions}
-                    selected={this.state.application.pregnant}
-                />
-            </div>
-        );
+        return this.renderTypeahead('Are you pregnant', 'Are you pregnant', 'pregnant', referenceData.yesNoOptions, this.state.application.pregnant);
     },
     renderPregnancy() {
         if(this.state.application.pregnant.includes('Yes')) {
             return (
                 <div className='row'>
                     {this.renderPregnancyQuestion()}
-                    <div className='col-md-4'>
-                        <FormGroup controlId="dueDate">
-                            <ControlLabel>Due date</ControlLabel>
-                            <DatePicker value={this.state.application.dueDate}
-                                onChange={(value) => { this.handleChange('dueDate', value);}} />
-                        </FormGroup>
-                    </div>
+                    {this.renderDateField('dueDate', 'Due date', this.state.application.dueDate, 'dueDate')}
                 </div>
             );
         } else {
@@ -450,41 +254,15 @@ const PersonApplicationComponent = React.createClass({
         }
     },
     renderDisabilityQuestion() {
-        return (
-            <div className='col-md-4'>
-                <ControlLabel>Are you disabled</ControlLabel>
-                <Typeahead
-                    placeholder="Are you disabled"
-                    onChange={(value) => {this.handleChange('disabled', value);}}
-                    options={referenceData.yesNoOptions}
-                    selected={this.state.application.disabled}
-                />
-            </div>
-        );
+        return this.renderTypeahead('Are you disabled', 'Are you Disabled', 'disabled', referenceData.yesNoOptions, this.state.application.disabled);
     },
     renderDisability() {
         if(this.state.application.disabled.includes('Yes')) {
             return (
                 <div className='row'>
                     {this.renderDisabilityQuestion()}
-                    <div className='col-md-4'>
-                        <ControlLabel>Disability Type</ControlLabel>
-                        <Typeahead
-                            placeholder="Disability Type"
-                            onChange={(value) => {this.handleChange('disabilityType', value);}}
-                            options={referenceData.disabilityType}
-                            selected={this.state.application.disabilityType}
-                        />
-                    </div>
-                    <div className='col-md-4'>
-                        <ControlLabel>Are you receiving care</ControlLabel>
-                        <Typeahead
-                            placeholder="Are you receiving care"
-                            onChange={(value) => {this.handleChange('receivingCare', value);}}
-                            options={referenceData.yesNoOptions}
-                            selected={this.state.application.receivingCare}
-                        />
-                    </div>
+                    {this.renderTypeahead('Disability Type', 'Disability Type', 'disabilityType', referenceData.disabilityType, this.state.application.disabilityType)}
+                    {this.renderTypeahead('Are you receiving care', 'Are you receiving care', 'receivingCare', referenceData.yesNoOptions, this.state.application.receivingCare)}
                 </div>
             );
         } else {
@@ -496,40 +274,17 @@ const PersonApplicationComponent = React.createClass({
         }
     },
     renderServices() {
+        const values = this.state.application.services;
         return (
             <div>
-                <div className='row'>
-                    <div className='col-md-3'>
-                        <input type="checkbox" checked={this.state.application.services.includes('emergencyShelter')} value="emergencyShelter" onChange={(event) => {this.handleServices(event.target.value);}} /> Emergency Shelter
-                    </div>
-                    <div className='col-md-3'>
-                        <input type="checkbox" checked={this.state.application.services.includes('food')} value="food" onChange={(event) => {this.handleServices(event.target.value);}} /> Food
-                    </div>
-                </div>
-                <div className='row'>
-                    <div className='col-md-3'>
-                        <input type="checkbox" checked={this.state.application.services.includes('clothing')} value="clothing" onChange={(event) => {this.handleServices(event.target.value);}} /> Clothing
-                    </div>
-                    <div className='col-md-3'>
-                        <input type="checkbox" checked={this.state.application.services.includes('hygine')} value="hygine" onChange={(event) => {this.handleServices(event.target.value);}} /> Hygine Supplies and Services
-                    </div>
-                </div>
-                <div className='row'>
-                    <div className='col-md-3'>
-                        <input type="checkbox" checked={this.state.application.services.includes('job')} value="job" onChange={(event) => {this.handleServices(event.target.value);}} /> Job Coaching/Searching
-                    </div>
-                    <div className='col-md-3'>
-                        <input type="checkbox" checked={this.state.application.services.includes('bills')} value="bills" onChange={(event) => {this.handleServices(event.target.value);}} /> Emergency Bill Aid
-                    </div>
-                </div>
-                <div className='row'>
-                    <div className='col-md-3'>
-                        <input type="checkbox" checked={this.state.application.services.includes('addiction')} value="addiction" onChange={(event) => {this.handleServices(event.target.value);}} /> Help with Addiction
-                    </div>
-                    <div className='col-md-3'>
-                        <input type="checkbox" checked={this.state.application.services.includes('mental')} value="mental" onChange={(event) => {this.handleServices(event.target.value);}} /> Mental Health Help
-                    </div>
-                </div>
+                {this.renderCheckBoxRow([{values: values, value: 'emergencyShelter', label: 'Emergency Shelter'},
+                                        {values: values, value: 'food', label: 'Food'}])}
+                {this.renderCheckBoxRow([{values: values, value: 'clothing', label: 'Clothing'},
+                                        {values: values, value: 'hygine', label: 'Hygine Supplies and Services'}])}
+                {this.renderCheckBoxRow([{values: values, value: 'job', label: 'Job Coaching/Searching'},
+                                        {values: values, value: 'bills', label: 'Emergency Bill Aid'}])}
+                {this.renderCheckBoxRow([{values: values, value: 'addiction', label: 'Help with Addiction'},
+                                        {values: values, value: 'mental', label: 'Mental Health Help'}])}
             </div>
         );
     },
@@ -544,13 +299,22 @@ const PersonApplicationComponent = React.createClass({
                 }
             });
     },
+    renderSectionHeader(header) {
+        return (
+            <div className="row">
+                <div className="col-md-12">
+                    <h4 className="form-header">{header}</h4>
+                </div>
+            </div>
+        );
+    },
     renderFullForm() {
         return (
             <div className='form-container'>
                 {this.renderMessage()}
                 <form className='form-padding'>
                     <div className="row">
-                        <div className="col-md-8">
+                        <div className="col-md-12">
                             <h2 className="application-header">Application For Services</h2>
                         </div>
                         <div className="col-md-12">
@@ -559,83 +323,37 @@ const PersonApplicationComponent = React.createClass({
                         </div>
                     </div>
                     <hr className="hr"/>
-                    <div className="row">
-                        <div className="col-md-12">
-                            <h4 className="form-header">Demographic Information</h4>
-                        </div>
-                    </div>
+                    {this.renderSectionHeader('Demographic Information')}
                     {this.renderDemographicInformation()}
-                                            <hr className="hr"/>
-
-                    <div className='row'>
-                        <div className="col-md-12">
-                            <h4 className="form-header">Contact Information</h4>
-                        </div>
-                    </div>
+                    <hr className="hr"/>
+                    {this.renderSectionHeader('Contact Information')}
                     {this.renderContactInformation()}
-                     <hr className="hr"/>
-                    <div className="row">
-                        <div className="col-md-12">
-                            <h4>Veteran Status</h4>
-                        </div>
-                    </div>
+                    <hr className="hr"/>
+                    {this.renderSectionHeader('Veteran Status')}
                     {this.renderVeteranQuestions()}
-                     <hr className="hr"/>
-
-                    <div className="row">
-                        <div className="col-md-12">
-                            <h4 className="form-header">Housing</h4>
-                        </div>
-                    </div>
+                    <hr className="hr"/>
+                    {this.renderSectionHeader('Housing')}
                     {this.renderHousing()}
-                     <hr className="hr"/>
-
-                    <div className="row">
-                        <div className="col-md-12">
-                            <h4 className="form-header">Employment</h4>
-                        </div>
-                    </div>
+                    <hr className="hr"/>
+                    {this.renderSectionHeader('Employment')}
                     {this.renderEmployment()}
-                     <hr className="hr"/>
-
-                    <div className="row">
-                        <div className="col-md-12">
-                            <h4>Education</h4>
-                        </div>
-                    </div>
+                    <hr className="hr"/>
+                    {this.renderSectionHeader('Education')}
                     {this.renderEducation()}
                     <hr className="hr"/>
-
-                    <div className="row">
-                        <div className="col-md-12">
-                            <h4 className="form-header">Health</h4>
-                        </div>
-                    </div>
+                    {this.renderSectionHeader('Health')}
                     {this.renderHealth()}
-                                            <hr className="hr"/>
-
+                    <hr className="hr"/>
                     {this.renderDomesticViolence()}
-                                            <hr className="hr"/>
-
+                    <hr className="hr"/>
                     {this.renderPregnancy()}
-                                            <hr className="hr"/>
-
-                    <div className="row">
-                        <div className="col-md-12">
-                            <h4 className="form-header">Disability</h4>
-                        </div>
-                    </div>
+                    <hr className="hr"/>
+                    {this.renderSectionHeader('Disability')}
                     {this.renderDisability()}
-                                            <hr className="hr"/>
-
-                    <div className="row">
-                        <div className="col-md-12">
-                            <h4 className="form-header">Services Needed</h4>
-                        </div>
-                    </div>
+                    <hr className="hr"/>
+                    {this.renderSectionHeader('Services Needed')}
                     {this.renderServices()}
-                                            <hr className="hr"/>
-
+                    <hr className="hr"/>
                     <div className="row">
                         <div className="col-md-4">
                             <Button id="saveButton"
@@ -665,25 +383,13 @@ const PersonApplicationComponent = React.createClass({
                         </div>
                     </div>
                     <hr className="hr"/>
-                    <div className="row">
-                        <div className="col-md-12">
-                            <h4 className="form-header">Demographic Information</h4>
-                        </div>
-                    </div>
+                    {this.renderSectionHeader('Demographic Information')}
                     {this.renderDemographicInformation()}
-                     <hr className="hr"/>
-                    <div className='row'>
-                        <div className="col-md-12">
-                            <h4 className="form-header">Contact Information</h4>
-                        </div>
-                    </div>
+                    <hr className="hr"/>
+                    {this.renderSectionHeader('Contact Information')}
                     {this.renderContactInformation()}
                     <hr className="hr"/>
-                    <div className="row">
-                        <div className="col-md-12">
-                            <h4 className="form-header">Services Needed</h4>
-                        </div>
-                    </div>
+                    {this.renderSectionHeader('Services Needed')}
                     {this.renderServices()}
                     <hr className="hr"/>
                     <div className="row">
