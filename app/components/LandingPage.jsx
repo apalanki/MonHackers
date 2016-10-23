@@ -17,11 +17,11 @@ export default class LandingPage extends React.Component{
 
 				<div className="card">
 					<div className="card-header">
-						<Link to="application"><h3>I Need Assistance</h3></Link>
+						<Link to="homeless_map"><h3>I Need Assistance</h3></Link>
 					</div>
 					<img src = "./INeedHelp.png" />
 					<div className="card-block">
-						<p className="card-text" >Find services that meet your needs.</p>
+						<p className="card-text" ><Link to="homeless_map">Find services near you</Link> that meet your needs or <Link to="application">apply for services.</Link></p>
 					</div>
 				</div>
 
@@ -31,7 +31,7 @@ export default class LandingPage extends React.Component{
 					</div>
 					<img src = "./volunteer-icon.png" />
 					<div className="card-block">
-						<p className="card-text" >Offer help to someone in need. You have more to offer than you think.</p>
+						<p className="card-text" >Help someone in need. You have more to offer than you think.</p>
 					</div>
 				</div>
 			</div>

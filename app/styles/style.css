@@ -68,6 +68,7 @@
 
 .pc-navbar {
 	background-color: lightblue;
+	opacity: .9;
 	margin: 0;
 }
 
@@ -95,11 +96,14 @@
 
 .nav-bar-background {
 	height: 80px;
+	-webkit-box-shadow: 0, 1px, 5px, 5px, blue;
+	box-shadow: 0, 1px, 5px, 5px, blue;
 }
 
 .stl-skyline {
 	width:100%;
 	height:100%;
+	min-height: 100vh;
 	background-image: url('./stlSkyline.jpg');
 	background-size:cover;
 	padding-bottom:200px;
@@ -117,7 +121,7 @@
 
 #saveButton{
 	margin-top: 25px;
-} 
+}
 
 .form-header{
 	padding-bottom: 15px;

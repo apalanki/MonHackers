@@ -1,6 +1,5 @@
 import React from 'react';
 import shouldPureComponentUpdate from 'react-pure-render/function';
-
 import GoogleMap from 'google-map-react';
 let ShelterPin = require('./ShelterPin.jsx');
 const MapsApiKey = 'AIzaSyC2XTd6n4hEiSPId4WRss-yZ8gzf2TDr9U';
@@ -11,13 +10,6 @@ let HomelessMap = React.createClass({
         zoom: React.PropTypes.number,
         greatPlaceCoords: React.PropTypes.any,
         shelters: React.PropTypes.array
-    },
-    getDefaultProps() {
-        return {
-            center: [59.938043, 30.337157],
-            zoom: 9,
-            greatPlaceCoords: {lat: 59.724465, lng: 30.080121}
-        };
     },
     shouldComponentUpdate: shouldPureComponentUpdate,
     getMarkers(){
