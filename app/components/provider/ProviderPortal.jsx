@@ -9,7 +9,6 @@ import clientData from '../client/clientData.js';
 const ProviderPortal = React.createClass({
     getInitialState(){
         return {
-            isLoggedIn: false,
             showLogInModal: true,
             provider: {
                 services: [],
@@ -17,22 +16,19 @@ const ProviderPortal = React.createClass({
                 resources: []
             },
             clients: [],
-            editing: false
+            editing: false,
+            name: ''
         };
-    },
-    setLoggedIn() {
-        this.setState({isLoggedIn: true});
     },
     openLoginModal() {
         this.setState({showLogInModal: true});
     },
-
     closeLoginModal(successful) {
         this.setState({showLogInModal: false});
         if (!successful) {
             document.location.href = '/';
         } else {
-            this.setState({provider: providerData, clients: clientData.clients});
+            this.setState({provider: providerData, clients: clientData.clients, name: providerData.name});
         }
     },
     renderLoginModal() {
@@ -62,7 +58,7 @@ const ProviderPortal = React.createClass({
                 <form className='form-padding'>
                     <div className='row'>
                         <div className='col-md-12'>
-                            <h1>{providerData.name}</h1>
+                            <h1>{this.state.name}</h1>
                         </div>
                     </div>
                     {this.renderProviderDetailsComponent()}
