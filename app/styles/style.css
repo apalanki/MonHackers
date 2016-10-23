@@ -89,6 +89,15 @@
 	opacity: .9;
 }
 
+.summary-container {
+	background-color: white;
+    opacity: .75;
+    margin-top: 60px;
+	font-family: 'Handlee', cursive;
+	font-size:20px;
+	font-weight: 900;
+}
+
 .form-padding {
 	padding: 15px;
 }
@@ -151,6 +160,12 @@
   padding: 0!important;
 }
 
+.navigation-item {
+	font-family: 'Handlee', cursive;
+	font-size:16px;
+	font-weight: 900;
+}
+
 .card {
   border: 1px solid rgba(0,0,0,.125);
   margin-bottom: .75rem;
@@ -179,6 +194,9 @@
 }
 
 .card-hover {
+	font-family: 'Handlee', cursive;
+	font-size:20px;
+	font-weight: 900;
 	opacity:0.75;
 }
 .card.opaque{
