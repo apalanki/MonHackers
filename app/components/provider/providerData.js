@@ -1,10 +1,10 @@
 const providerData = {
-    name: 'Our Lady\'s Inn',
+    name: 'Peter & Paul',
     address: '4223 S. Compton St. Louis, MO 63111',
     phone: '314-351-4590',
-    email: 'mlaubengayer@ourladysinn.org',
+    email: 'mlaubengayer@peterpaul.org',
     services: ['Emergency Shelter'],
-    restrictions: 'Women only, Must be pregnant',
+    restrictions: 'Men only',
     resources: [
         {
             name: 'Beds',

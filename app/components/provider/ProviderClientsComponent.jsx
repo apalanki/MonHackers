@@ -2,6 +2,7 @@ import React from 'react';
 import {Button} from 'react-bootstrap';
 import ClientCardComponent from '../client/ClientCardComponent.jsx';
 import ClientCheckoutModal from '../client/ClientCheckoutModal.jsx';
+import ClientReferalModal from '../client/ClientReferalModal.jsx';
 import _ from 'lodash';
 
 const ProviderClientsComponent = React.createClass({
@@ -9,14 +10,19 @@ const ProviderClientsComponent = React.createClass({
         return {
             clients: [],
             showCheckoutModal: false,
+            showReferalModal: false,
+            showCheckinModal: false,
             selectedClient: {}
         };
     },
     componentWillReceiveProps(nextProps) {
         this.setState({clients: nextProps.clients});
     },
-    checkIn() {
-// TODO check in modal
+    checkIn(client) {
+        this.closeModal('showCheckinModal');
+        const clients = this.state.clients;
+        clients.push(client);
+        this.setState({clients: clients, selectedClient: {}});
     },
     checkOut() {
         this.closeModal('showCheckoutModal');
@@ -27,8 +33,13 @@ const ProviderClientsComponent = React.createClass({
         });
         this.setState({clients: filteredClients, selectedClient: {}});
     },
-    referClient() {
-// TODO refer modal
+    referClient(checkout) {
+        this.closeModal('showReferalModal');
+        if(checkout) {
+            this.checkOut();
+        } else {
+            this.setState({selectedClient: {}});
+        }
     },
     openModal(field) {
         const newState = {};
@@ -56,6 +67,14 @@ const ProviderClientsComponent = React.createClass({
                 name={this.state.selectedClient.name} />
         );
     },
+    renderClientReferal() {
+        return (
+            <ClientReferalModal show={this.state.showReferalModal}
+                close={this.closeModal}
+                referClient={this.referClient}
+                name={this.state.selectedClient.name} />
+        );
+    },
     renderClientCard(client, index) {
         return (
             <div className='col-md-3 card-padding' key={`clientCard${index}`}>
@@ -71,6 +90,7 @@ const ProviderClientsComponent = React.createClass({
         return (
             <div>
                 {this.renderClientCheckout()}
+                {this.renderClientReferal()}
                 <div className='row top-padding'>
                     <div className='col-md-4'>
                         <h3 className='underline'>Clients</h3>
@@ -93,7 +113,7 @@ const ProviderClientsComponent = React.createClass({
                     <div className='col-md-1 top-padding'>
                         <Button id='referal'
                             bsStyle='default'
-                            onClick={this.referClient}
+                            onClick={() => {this.openModal('showReferalModal');}}
                             disabled={!this.state.selectedClient.name}>
                             Refer Client
                         </Button>
