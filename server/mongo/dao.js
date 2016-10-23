@@ -55,7 +55,7 @@ const generateGenderQuery = (value,query) => {
 }
 
 function shelterSearch(requestQuery, callback) {
-    var query = {}; let genQuery = {};
+    var query = {}; var genQuery = {};
     var subquery = {};
     console.log("requstQuery" + util.inspect(requestQuery));
     const count = _(requestQuery).filter( (item) => {
